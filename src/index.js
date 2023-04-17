@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import Main from './Main';
 import reportWebVitals from './reportWebVitals';
+//import { createHashRouter } from 'react-router-dom';
+//import { createRouter, RouterProvider } from 'react-router5';
 import {
   createBrowserRouter,
   RouterProvider,

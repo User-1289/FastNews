@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
+//import { useRoute } from 'react-router5';
 //import styles from './App.module.css'
 
-function startApp()
-{
-  window.open("https://fastnewswebsite.netlify.app/main", "_blank")
-}
 function App() 
 {
+ // const { route } = useRoute();
+
+  function startApp() {  
+    window.open("main", "_blank")
+   // route.navigate('main');
+  }
   return (
     <>
     <div id="sign-container">
