@@ -4,8 +4,7 @@ import './App.css';
 
 function startApp()
 {
-  alert('you clicked it right')
-  window.open("main", "_blank")
+  window.open("/main", "_blank")
 }
 function App() 
 {
