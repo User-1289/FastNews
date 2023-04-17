@@ -1,7 +1,14 @@
 import React from 'react';
 import './App.css';
+//import styles from './App.module.css'
 
-function App() {
+function startApp()
+{
+  alert('you clicked it right')
+  window.open("main", "_blank")
+}
+function App() 
+{
   return (
     <>
     <div id="sign-container">
@@ -12,7 +19,7 @@ function App() {
     <h1 id="news-text">News</h1>
     <div id="welcome-text">
     Reading the news can help you stay informed<br/> and gain diverse perspectives, but it's important<br/> to be selective and approach it<br/> with critical thinking.<br/><br/>
-    <button>Start Exploring</button>
+    <button onClick={startApp}>Start Exploring</button>
     </div>
 
     <footer>

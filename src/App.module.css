@@ -1,0 +1,139 @@
+/* CSS for screens between 600px and 900px */
+
+/* Common CSS for all screen sizes */
+body {
+  font-family: 'Archivo-Black';
+  background-image: url("background.jpg");
+  /*background-size: cover;
+  background-repeat: no-repeat;*/
+  color: white;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Set the background color for the dimming effect */
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.9;
+}
+
+#news-text {
+  text-align: center;
+  color: black;
+}
+
+#sign-container {
+  margin: 20px;
+  font-weight: bold;
+  text-align: right;
+}
+
+#sign-up-text {
+  background: black;
+  color: white;
+  padding: 10px;
+}
+
+#log-in-text {
+  color: black;
+  padding: 10px;
+}
+
+#welcome-text {
+  text-align: center;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight:bolder;
+  color: white;
+  font-size: 30px;
+}
+
+button {
+  font-size: 30px;
+  color: white;
+  background: black;
+  cursor: pointer;
+}
+
+#quote-text {
+  text-align: left;
+  position: absolute;
+  top: 95%;
+  left: 95%;
+  transform: translate(-90%, -90%);
+  font-weight: 600;
+}
+footer{
+  overflow: hidden;
+}
+
+
+/* CSS for screens smaller than 600px */
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 16px;
+    background-image: url("background.jpg");
+    padding-bottom: 100px;
+    color: white;
+  }
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Set the background color for the dimming effect */
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
+  }
+  #news-text {
+    font-size: 40px;
+  }
+
+  #sign-container {
+    font-size: 20px;
+    text-align: right;
+
+  }
+
+  #sign-up-text {
+    background: black;
+    color: white;
+    padding: 5px;
+  }
+
+  #log-in-text {
+    padding: 5px;
+    color: black;
+  }
+
+  #welcome-text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  button {
+    font-size: 20px;
+  }
+
+  #quote-text {
+    text-align: left;
+    position: absolute;
+    top: 90%;
+    left: 90%;
+    transform: translate(-90%, -90%);
+    font-weight: 600;
+    font-size: 15px;
+  }
+}
