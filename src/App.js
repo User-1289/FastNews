@@ -4,7 +4,7 @@ import './App.css';
 
 function startApp()
 {
-  window.open("main", "_blank")
+  window.open("https://fastnewswebsite.netlify.app/main", "_blank")
 }
 function App() 
 {
