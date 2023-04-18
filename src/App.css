@@ -9,17 +9,7 @@ body {
   color: white;
 }
 
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Set the background color for the dimming effect */
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0.9;
-}
+
 
 #news-text {
   text-align: center;
@@ -82,17 +72,7 @@ footer{
     padding-bottom: 100px;
     color: white;
   }
-  body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Set the background color for the dimming effect */
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0.9;
-  }
+
   #news-text {
     font-size: 40px;
   }

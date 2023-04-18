@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Main from './Main';
+import MainPage from './MainPage';
+import SideNews from './SideNews';
 import reportWebVitals from './reportWebVitals';
 //import { createHashRouter } from 'react-router-dom';
 //import { createRouter, RouterProvider } from 'react-router5';
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/main",
-    element: <Main/>
+    element: <MainPage/>
+  },
+  {
+    path: "/content-news",
+    element: <SideNews />
   }
 ])
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -5,6 +5,11 @@ import './App.css';
 
 function App() 
 {
+ // fetch("https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=eab1631abf374798bc855fffdc90194f")
+ // .then(responce => responce.json())
+ // .then(data=>{
+ //   console.log(data)
+ // })
  // const { route } = useRoute();
 
   function startApp() {  
@@ -32,6 +37,20 @@ function App()
     </center>
     </>
   );
+
+//  const styles = {
+//    body::before {
+//      content: '',
+//      position: absolute,
+//      top: 0,
+//      left: 0,
+//      width: 100%,
+//      height: 100%,
+//      /* Set the background color for the dimming effect */
+//      background-color: rgba(0, 0, 0, 0.5),
+//      opacity: 0.9,
+//    }
+//  }
 }
 
 export default App;
