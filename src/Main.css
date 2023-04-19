@@ -1,7 +1,8 @@
 .news-types{
-    background: black;
-    color: white;
-    text-shadow: 0 0 5px black, 0 0 10px black, 0 0 15px white, 0 0 20px white;
+    background: gray;
+    color: black;
+    font-size: bolder;
+
     cursor: pointer;
 }
 #news-text{
