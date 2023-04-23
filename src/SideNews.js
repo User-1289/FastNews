@@ -1,50 +1,56 @@
 import React from 'react';
 import './SideNews.css'
+
+
   function SideNews() 
   {
-const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search);
 const news = urlParams.get('news');
-let catGory = ''
-
-
-if(news==="Indian News")
+let newsCut = news.split(' ')
+const lNews = newsCut[0].toLowerCase()
+//let finalNews = lNews + '-' + 'news'
+fetch(`http://localhost:1000/${lNews}`)
+.then((response) => response.json())
+  .then((data) => console.log(data))
+/*if(news==='Indian News')
 {
-//  alert(searchTerm)
-  fetch(`https://newsapi.org/v2/top-headlines?country=in&apiKey=eab1631abf374798bc855fffdc90194f`)
-  .then(responce => responce.json())
-  .then(data=>
-  {
-    console.log(data)
-  })
+  fetch("http://localhost:1000/indian")
+  .then((response) => response.json())
+  .then((data) => console.log(data))
 }
-  else if(news==="World News")
+  else if(news==='World News')
   {
-      fetch('https://newsapi.org/v2/top-headlines?language=en&apiKey=eab1631abf374798bc855fffdc90194f')
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    fetch("http://localhost:1000/world")
+    .then((response) => response.json())
+    .then((data) => console.log(data))
   }
-      else
+    else if(news==='Business News')
+    {
+      fetch("http://localhost:1000/business")
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+    }
+      else if(news==='Technology News')
       {
-        let arr = news.split(' ')
-        catGory = arr[0]
-        console.log(catGory)
+        fetch("http://localhost:1000/technology")
+        .then((response) => response.json())
+        .then((data) => console.log(data))
       }
-
-     // fetch(`https://newsapi.org/v2/top-headlines?category=${catGory}&language=en&apiKey=eab1631abf374798bc855fffdc90194f`)
-     // .then(response => response.json())
-     // .then(data => 
-     // {
-     //   console.log(data);
-     // })
-     // .catch(error => 
-     // {
-     //   console.log(error);
-     // });
+        else if(news==='Sports News')
+        {
+          fetch("http://localhost:1000/sports")
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+        }
+          else if(news==='Entertainment News')
+          {
+            fetch("http://localhost:1000/entertainment")
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+          }*/
+//let newsCut = news.split(' ')
+//const lNews = newsCut[0].toLowerCase()
+//let finalNews = lNews + '-' + 'news'
 
     return (
       <div className='side-container'>
