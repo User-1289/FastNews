@@ -10,7 +10,7 @@ export default function Main() {
       let newsCut = news.split(' ');
       const lNews = newsCut[0].toLowerCase();
   
-      const response = await fetch(`https://news-api-ie3w.onrender.com//${lNews}`);
+      const response = await fetch(`https://news-api-ie3w.onrender.com/${lNews}`);
       const data = await response.json();
       console.log(arr)
       setArr(data); // update the arr state variable with fetched data
