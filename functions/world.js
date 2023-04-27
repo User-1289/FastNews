@@ -1,5 +1,7 @@
+const mongoose = require("mongoose");
+const WorldCol = require("./models/world-model");
+
 exports.handler = async function(event, context) {
-  const mongoose = require("mongoose");
   let arr = [];
   try {
     await mongoose.connect("mongodb+srv://ar1289:Seenu1146%23@cluster0.6wrbl7a.mongodb.net/News-data", {
@@ -7,7 +9,6 @@ exports.handler = async function(event, context) {
       useUnifiedTopology: true,
     });
 
-    const WorldCol = mongoose.model('world-news', { author: String });
     const data = await WorldCol.find({});
     arr = data.map(doc => doc.toObject()); // Convert MongoDB documents to plain objects
   } catch (error) {

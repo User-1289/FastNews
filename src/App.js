@@ -7,7 +7,7 @@ import './Main.css';
 function App() 
 {
   useEffect(() => {
-    fetch(`/.netlify/functions/indian`)
+    fetch(`/.netlify/functions/world`)
       .then(responce => responce.json())
       .then((data) => {
         console.log(data); // move the console.log here
