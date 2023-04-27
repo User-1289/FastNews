@@ -40,6 +40,7 @@
     ]
   },
   "devDependencies": {
+    "mongoose": "^7.0.5",
     "netlify-cli": "^14.3.0"
   }
 }
