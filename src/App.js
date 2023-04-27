@@ -7,7 +7,7 @@ import './Main.css';
 function App() 
 {
   useEffect(() => {
-    fetch(`https://fastnewswebsite.netlify.app/.netlify/functions/sports`)
+    fetch(`/.netlify/functions/indian`)
       .then(responce => responce.json())
       .then((data) => {
         console.log(data); // move the console.log here
@@ -30,7 +30,7 @@ function App()
       const newsCut = news.split(' ');
       const lNews = newsCut[0].toLowerCase();
 
-      const response = await fetch(`https://fastnewswebsite.netlify.app/.netlify/functions/${lNews}`);
+      const response = await fetch(`/.netlify/functions/${lNews}`);
       const data = await response.json();
       setNews(news);
       setArr(data);

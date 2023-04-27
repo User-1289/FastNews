@@ -6,17 +6,21 @@ exports.handler = async function(event, context) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    console.log("Connected to MongoDB Atlas");
 
-    const IndianCol = mongoose.model('indian-news', { author: String });
+    const IndianCol = mongoose.model("indian-news", { author: String });
     const data = await IndianCol.find({});
-    arr = data
+    arr = JSON.stringify(data);
+
+    return {
+      statusCode: 200,
+      body: arr,
+    };
   } catch (error) {
     console.log("Error connecting to MongoDB Atlas:", error);
+    return {
+      statusCode: 500,
+      body: "Internal Server Error",
+    };
   }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(arr)
-
-  };
-}
+};
