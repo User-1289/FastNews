@@ -19,7 +19,7 @@ body{
     text-align: center;
   }
   .news-container{
-    width: 400px;
+    width:70%;
     background: gray;
     border-radius: 15px;
   }
@@ -31,7 +31,7 @@ body{
         color:white;
   }
   h2{
-    font-size: 25px;
+    font-size: 35px;
   }
   .author-txt
   {
@@ -40,5 +40,11 @@ body{
   @media only screen and (max-width: 600px) {
     .news-types {
       font-size: 3.5vw;
+    }
+    h2{
+      font-size: 25px;
+    }
+    .news-container{
+      width: 100%;
     }
   }
