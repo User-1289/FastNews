@@ -6,18 +6,18 @@ import './Main.css';
 
 function App() 
 {
-  useEffect(() => {
-    fetch(`/.netlify/functions/world`)
-      .then(responce => responce.json())
-      .then((data) => {
-        console.log(data); // move the console.log here
-      });
-  }, []);
+  //useEffect(() => {
+  //  fetch(`/.netlify/functions/world`)
+  //    .then(responce => responce.json())
+  //    .then((data) => {
+  //      console.log(data); // move the console.log here
+  //    });
+  //}, []);
   const [news, setNews] = useState("News");
   const [arr, setArr] = useState([]);
 
   useEffect(() => {
-    fetch(`https://news-api-ie3w.onrender.com/world`)
+    fetch(`/.netlify/functions/world`)
       .then(responce => responce.json())
       .then((data) => {
         setArr(data);
