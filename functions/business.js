@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const BusinessCol = require("./models/business-model");
+const BusinessCol = require("./business-model");
 
 exports.handler = async function(event, context) {
   let arr = [];

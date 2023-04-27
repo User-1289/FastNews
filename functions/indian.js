@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const IndianCol = require("./models/indian-model");
+const IndianCol = require("./indian-model");
 
 exports.handler = async function(event, context) {
   let arr = [];
