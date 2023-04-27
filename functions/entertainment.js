@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const EntertainmentCol = require("./indian-model");
+const EntertainmentCol = require("./models/indian-model");
 
 exports.handler = async function(event, context) {
   let arr = [];
   try {
-    await mongoose.connect("mongodb+srv://ar1289:Seenu1146%23@cluster0.6wrbl7a.mongodb.net/News-data", {
+    await mongoose.connect(process.env.DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
