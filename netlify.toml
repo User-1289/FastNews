@@ -2,27 +2,3 @@
   command = "npm run build"
   publish = "build"
   functions = "functions"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[[headers]]
-  # Enable CORS for all origins
-  Access-Control-Allow-Origin = "*"
-  # Set the cache-control header for all files in the /static folder
-  [headers.values]
-    "/static/*" = "public, max-age=31536000, immutable"
-  
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-
-[build.environment]
-  NODE_VERSION = "14"
-
-[dev]
-  command = "npm start"
-  publish = "public"
