@@ -1,3 +1,7 @@
+body{
+  background: black;
+}
+
 .nav-bar {
     display: flex;
     justify-content: space-between;
@@ -22,8 +26,9 @@
   hr{
     border: 2px solid white;
   }
-  a{
-    color:white;
+  .news-container a{
+    transition: font-size 0.3s ease;
+        color:white;
   }
   h2{
     font-size: 25px;

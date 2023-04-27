@@ -1,56 +1,62 @@
-import React from 'react';
-import './App.css';
+
+import React, { useState, useEffect } from 'react';
+import './Main.css';
 //import { useRoute } from 'react-router5';
 //import styles from './App.module.css'
 
 function App() 
 {
- // fetch("https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=eab1631abf374798bc855fffdc90194f")
- // .then(responce => responce.json())
- // .then(data=>{
- //   console.log(data)
- // })
- // const { route } = useRoute();
+  const [news, setNews] = useState("News");
+  const [arr, setArr] = useState([]);
 
-  function startApp() {  
-    window.open("main", "_blank")
-   // route.navigate('main');
+  useEffect(() => {
+    fetch(`https://news-api-ie3w.onrender.com/world`)
+      .then(responce => responce.json())
+      .then((data) => {
+        setArr(data);
+      });
+  }, []);
+
+  async function getNews(event) {
+    try {
+      const news = event.target.innerText;
+      const newsCut = news.split(' ');
+      const lNews = newsCut[0].toLowerCase();
+
+      const response = await fetch(`https://news-api-ie3w.onrender.com/${lNews}`);
+      const data = await response.json();
+      setNews(news);
+      setArr(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
   return (
     <>
-    <div id="sign-container">
-      <span id="sign-up-text">Sign up</span>
-      <span id="log-in-text">Log in</span>
-    </div>
-    <center>
-    <h1 id="news-text">News</h1>
-    <div id="welcome-text">
-    Reading the news can help you stay informed<br/> and gain diverse perspectives, but it's important<br/> to be selective and approach it<br/> with critical thinking.<br/><br/>
-    <button onClick={startApp}>Start Exploring</button>
-    </div>
-
-    <footer>
-      <div id="quote-container">
-    <h2 id="quote-text" >"The News is Like Never Ending Story,<br/> But With Real Life Consequences."</h2>
+      <div className='nav-bar'>
+        <span onClick={(event) => getNews(event)} className='news-types'>World News</span>
+        <span onClick={(event) => getNews(event)} className='news-types'>Indian News</span>
+        <span onClick={(event) => getNews(event)} className='news-types'>Technology News</span>
+        <span onClick={(event) => getNews(event)} className='news-types'>Business News</span>
+        <span onClick={(event) => getNews(event)} className='news-types'>Sports News</span>
+        <span onClick={(event) => getNews(event)} className='news-types'>Entertainment News</span>
+      </div><br/>
+      <h1>{news}</h1>
+      <center>
+      <div className='news-container'>
+        {arr.map((obj, index) => (
+          <div key={index}>
+            <img alt='text' width='400' height='200' src={obj.urlToImage}/>
+            <div className='author-txt'>{obj.author}</div>
+             <a rel="noreferrer" target="_blank" href={obj.url} key={index}><h2>{obj.title}</h2></a>
+              <hr/>
+          </div>
+          ))}
       </div>
-    </footer>
-    </center>
+      </center>
     </>
   );
-
-//  const styles = {
-//    body::before {
-//      content: '',
-//      position: absolute,
-//      top: 0,
-//      left: 0,
-//      width: 100%,
-//      height: 100%,
-//      /* Set the background color for the dimming effect */
-//      background-color: rgba(0, 0, 0, 0.5),
-//      opacity: 0.9,
-//    }
-//  }
 }
 
 export default App;
