@@ -6,6 +6,13 @@ import './Main.css';
 
 function App() 
 {
+  useEffect(() => {
+    fetch(`https://fastnewswebsite.netlify.app/.netlify/functions/sports`)
+      .then(responce => responce.json())
+      .then((data) => {
+        console.log(data); // move the console.log here
+      });
+  }, []);
   const [news, setNews] = useState("News");
   const [arr, setArr] = useState([]);
 
@@ -23,7 +30,7 @@ function App()
       const newsCut = news.split(' ');
       const lNews = newsCut[0].toLowerCase();
 
-      const response = await fetch(`https://news-api-ie3w.onrender.com/${lNews}`);
+      const response = await fetch(`https://fastnewswebsite.netlify.app/.netlify/functions/${lNews}`);
       const data = await response.json();
       setNews(news);
       setArr(data);

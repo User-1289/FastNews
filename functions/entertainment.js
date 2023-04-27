@@ -9,13 +9,14 @@ exports.handler = async function(event, context) {
 
     const EntertainmentCol = mongoose.model('entertainment-news', { author: String });
     const data = await EntertainmentCol.find({});
-    arr = JSON.stringify(data);
+    arr = data
   } catch (error) {
     console.log("Error connecting to MongoDB Atlas:", error);
   }
 
   return {
     statusCode: 200,
-    body: arr,
+    body: JSON.stringify(arr)
+
   };
 }

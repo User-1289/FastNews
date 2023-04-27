@@ -9,13 +9,13 @@ exports.handler = async function(event, context) {
 
     const WorldCol = mongoose.model('world-news', { author: String });
     const data = await WorldCol.find({});
-    arr = JSON.stringify(data);
+    arr = data.map(doc => doc.toObject()); // Convert MongoDB documents to plain objects
   } catch (error) {
     console.log("Error connecting to MongoDB Atlas:", error);
   }
 
   return {
     statusCode: 200,
-    body: arr,
+    body: JSON.stringify(arr)
   };
 }
