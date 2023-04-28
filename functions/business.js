@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-require('dotenv').config
 const BusinessCol = require("./models/business-model");
 console.log(typeof process.env.DB_URI)
 exports.handler = async function(event, context) {
