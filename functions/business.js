@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+require('dotenv').config
 const BusinessCol = require("./models/business-model");
-
+console.log(typeof process.env.DB_URI)
 exports.handler = async function(event, context) {
   let arr = [];
   try {
@@ -18,7 +19,6 @@ exports.handler = async function(event, context) {
 
   return {
     statusCode: 200,
-    body: JSON.stringify(arr)
-
+    body: JSON.stringify(arr),
   };
 }
