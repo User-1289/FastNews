@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const IndianCol = require("./models/indian-model");
 require('dotenv').config
+console.log(process.env.DB_URI)
 exports.handler = async function(event, context) {
   let arr = [];
   try { 
