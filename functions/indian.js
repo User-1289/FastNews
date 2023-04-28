@@ -3,7 +3,7 @@ const IndianCol = require("./models/indian-model");
 require('dotenv').config
 exports.handler = async function(event, context) {
   let arr = [];
-  try {
+  try { 
     await mongoose.connect(process.env.DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
