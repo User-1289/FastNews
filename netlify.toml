@@ -1,4 +1,4 @@
 [build]
-  command = "netlify deploy --prod"
-  publish = "build"
-  functions = "functions"
+command = 'npm run build'
+functions = 'functions'
+publish = 'build'
