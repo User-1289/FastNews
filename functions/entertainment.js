@@ -4,7 +4,7 @@ const EntertainmentCol = require("./models/indian-model");
 exports.handler = async function(event, context) {
   let arr = [];
   try {
-    await mongoose.connect(process.env.DB_URI, {
+    await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.6wrbl7a.mongodb.net/News-data`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
