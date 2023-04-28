@@ -15,6 +15,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "api:server": "netlify-lambda serve .netlify/functions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -43,6 +44,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "mongoose": "^7.0.5",
-    "netlify-cli": "^14.3.0"
+    "netlify-cli": "^14.3.0",
+    "netlify-lambda": "^2.0.16"
   }
 }

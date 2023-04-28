@@ -13,7 +13,7 @@ function App()
   //      console.log(data); // move the console.log here
   //    });
   //}, []);
-  const [news, setNews] = useState("News");
+  //const [news, setNews] = useState("News");
   const [arr, setArr] = useState([]);
   const[currentNews, setCurrentNews] = useState("World News")
   useEffect(() => {
@@ -33,7 +33,7 @@ function App()
 
       const response = await fetch(`/.netlify/functions/${lNews}`);
       const data = await response.json();
-      setNews(news);
+    //  setNews(news);
       setArr(data);
     } catch (error) {
       console.log(error);
