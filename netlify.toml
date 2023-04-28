@@ -1,4 +1,4 @@
 [build]
-  command = "CI=false netlify deploy --prod"
+  command = "netlify deploy --prod"
   publish = "build"
   functions = "functions"
