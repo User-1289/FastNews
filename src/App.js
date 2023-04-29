@@ -30,7 +30,7 @@ function App()
       const newsCut = news.split(' ');
       const lNews = newsCut[0].toLowerCase();
 
-      const response = await fetch(`https://news-api-ie3w.onrender.com/${lNews}`);
+      const response = await fetch(`/.netlify/functions/${lNews}`);
       const data = await response.json();
       setNews(news);
       setArr(data);
