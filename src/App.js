@@ -17,7 +17,7 @@ function App()
   const [arr, setArr] = useState([]);
 
   useEffect(() => {
-    fetch(`https://news-api-ie3w.onrender.com/world`)
+    fetch(`/.netlify/functions/world`)
       .then(responce => responce.json())
       .then((data) => {
         setArr(data);
@@ -30,7 +30,7 @@ function App()
       const newsCut = news.split(' ');
       const lNews = newsCut[0].toLowerCase();
 
-      const response = await fetch(`/.netlify/functions/${lNews}`);
+      const response = await fetch(`https://news-api-ie3w.onrender.com/${lNews}`);
       const data = await response.json();
       setNews(news);
       setArr(data);
