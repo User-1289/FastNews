@@ -42,6 +42,7 @@
   "devDependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "firebase": "^9.21.0",
     "mongoose": "^7.0.5",
     "netlify-cli": "^14.3.0"
   }

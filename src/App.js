@@ -1,37 +1,60 @@
 
 import React, { useState, useEffect } from 'react';
 import './Main.css';
+import Sidebar from './Sidebar.js'
 //import { useRoute } from 'react-router5';
 //import styles from './App.module.css'
 
-function App() 
+function App(props) 
 {
-  useEffect(() => {
-    fetch(`/.netlify/functions/world`)
-      .then(responce => responce.json())
-      .then((data) => {
-        console.log(data); // move the console.log here
-      });
-  }, []);
+ // useEffect(() => {
+ //   fetch(`/.netlify/functions/world`)
+ //     .then(responce => responce.json())
+ //     .then((data) => {
+ //       console.log(data); // move the console.log here
+ //     });
+ // }, []);
   const [news, setNews] = useState("News");
   const [arr, setArr] = useState([]);
-
-  useEffect(() => {
-    fetch(`/.netlify/functions/world`)
-      .then(responce => responce.json())
-      .then((data) => {
-        setArr(data);
-      });
-  }, []);
+  const [newsType, setNewsType] = useState("World")
+  let dataArr = props.categoryData
+  useEffect(() =>
+  {
+    console.log(props)
+  }, [dataArr])
+  //if(dataArr.length>0)
+  //{
+  //  setArr(dataArr)
+  //}
+ // useEffect(() => {
+ //   fetch(`/.netlify/functions/world`)
+ //     .then(responce => responce.json())
+ //     .then((data) => {
+ //       setArr(data);
+ //     });
+ // }, []);
 
   async function getNews(event) {
     try {
+
       const news = event.target.innerText;
       const newsCut = news.split(' ');
+      if(newsType==newsCut[0])
+      {
+        console.log('bruh')
+        return;
+      }
+      setNewsType(newsCut[0])
       const lNews = newsCut[0].toLowerCase();
 
-      const response = await fetch(`/.netlify/functions/${lNews}`);
-      const data = await response.json();
+     // const response = await fetch(`/.netlify/functions/${lNews}`);
+     let responce = await fetch('/.netlify/functions/getdata', {
+      method: 'POST',
+      body: JSON.stringify({ newsVar: 'kerala'}),
+    })
+      const data = await responce.json();
+      console.log(data)
+     //return
       setNews(news);
       setArr(data);
     } catch (error) {
@@ -48,13 +71,15 @@ function App()
         <span onClick={(event) => getNews(event)} className='news-types'>Business News</span>
         <span onClick={(event) => getNews(event)} className='news-types'>Sports News</span>
         <span onClick={(event) => getNews(event)} className='news-types'>Entertainment News</span>
-      </div><br/>
+      </div>
+      <Sidebar/>
+      <br/>
       <h1>{news}</h1>
       <center>
       <div className='news-container'>
         {arr.map((obj, index) => (
           <div key={index}>
-            <img alt='text' width='400' height='200' src={obj.urlToImage}/>
+            <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
             <div className='author-txt'>{obj.author}</div>
              <a rel="noreferrer" target="_blank" href={obj.url} key={index}><h2>{obj.title}</h2></a>
               <hr/>

@@ -1,0 +1,28 @@
+input{
+    color: white;
+    background-color: transparent;
+    border-radius: 10px;
+    width: 130px;
+}
+.material-symbols-outlined {
+    cursor: pointer;
+    margin: 3px;
+    position: relative;
+    top:4px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+.cat-txt{
+    text-align: center;
+    display: inline;
+    font-size: 30px;
+    width: 200px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background: white;
+    color: black;
+    cursor: pointer;
+}

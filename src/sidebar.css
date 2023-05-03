@@ -1,0 +1,28 @@
+body{
+    color: white;
+}
+
+.sidebar {
+    background-color: rgba(255, 255, 255, 0.1);
+    height: 100%;
+    width: 200px;
+    position: absolute;
+    top: 11;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  .sidebar button {
+background: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
