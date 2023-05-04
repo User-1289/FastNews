@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './category.css';
 
-export default function Category(props) {
+export default function Category(props) 
+{
     const [isMobile, setIsMobile] = useState(false);
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
