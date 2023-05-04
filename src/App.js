@@ -16,8 +16,6 @@ function App(props)
 
 
 
-  let dataArr = props.categoryData
-
     useEffect(() => {
         setArr(catArr)
   }, [catArr]);
@@ -27,7 +25,7 @@ function App(props)
 
       const news = event.target.innerText;
       const newsCut = news.split(' ');
-      if(newsType==newsCut[0])
+      if(newsType===newsCut[0])
       {
         return;
       }

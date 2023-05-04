@@ -9,10 +9,10 @@ export default function Category(props) {
       });
   const spanRef = useRef(null);//to get the spans text that contains categories
   const [category, setCategory] = useState('');//to get the input's value
-  const [container, deleteContainer] = useState(false);//to delete the container
+  //const [container, deleteContainer] = useState(false);//to delete the container
   const [catArr, setCatArr] = useState([]);//this array contains all the categories user entered
   const [newsData, setNewsData] = useState([]);//this is used to send data to the app.js to diisplay news there
-  const [spanTxt, setSpanTxt] = useState('');
+ // const [spanTxt, setSpanTxt] = useState('');
 
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function Category(props) {
       } else {
         setIsMobile(false);
       }
-})
+}, [])
 
   useEffect(() => {
     setCatArr(JSON.parse(localStorage.getItem("Categories")))
