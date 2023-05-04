@@ -2,37 +2,25 @@
 import React, { useState, useEffect } from 'react';
 import './Main.css';
 import Sidebar from './Sidebar.js'
+import Category from './Category';
 //import { useRoute } from 'react-router5';
 //import styles from './App.module.css'
 
 function App(props) 
 {
- // useEffect(() => {
- //   fetch(`/.netlify/functions/world`)
- //     .then(responce => responce.json())
- //     .then((data) => {
- //       console.log(data); // move the console.log here
- //     });
- // }, []);
+
   const [news, setNews] = useState("News");
   const [arr, setArr] = useState([]);
   const [newsType, setNewsType] = useState("World")
+  const [catArr, setCatArr] = useState([])
+
+
+
   let dataArr = props.categoryData
-  useEffect(() =>
-  {
-    console.log(props)
-  }, [dataArr])
-  //if(dataArr.length>0)
-  //{
-  //  setArr(dataArr)
-  //}
- // useEffect(() => {
- //   fetch(`/.netlify/functions/world`)
- //     .then(responce => responce.json())
- //     .then((data) => {
- //       setArr(data);
- //     });
- // }, []);
+
+    useEffect(() => {
+        setArr(catArr)
+  }, [catArr]);
 
   async function getNews(event) {
     try {
@@ -41,7 +29,6 @@ function App(props)
       const newsCut = news.split(' ');
       if(newsType==newsCut[0])
       {
-        console.log('bruh')
         return;
       }
       setNewsType(newsCut[0])
@@ -50,10 +37,9 @@ function App(props)
      // const response = await fetch(`/.netlify/functions/${lNews}`);
      let responce = await fetch('/.netlify/functions/getdata', {
       method: 'POST',
-      body: JSON.stringify({ newsVar: 'kerala'}),
+      body: JSON.stringify({ newsVar: lNews}),
     })
       const data = await responce.json();
-      console.log(data)
      //return
       setNews(news);
       setArr(data);
@@ -71,10 +57,10 @@ function App(props)
         <span onClick={(event) => getNews(event)} className='news-types'>Business News</span>
         <span onClick={(event) => getNews(event)} className='news-types'>Sports News</span>
         <span onClick={(event) => getNews(event)} className='news-types'>Entertainment News</span>
-      </div>
-      <Sidebar/>
-      <br/>
+      </div><br/>    
       <h1>{news}</h1>
+      <Sidebar/>
+      <Category sendNews={news => setCatArr(news)}/>
       <center>
       <div className='news-container'>
         {arr.map((obj, index) => (

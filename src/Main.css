@@ -22,6 +22,7 @@ h1{
     text-align: center;
   }
   .news-container{
+    
     width:70%;
     background: gray;
     border-radius: 15px;
@@ -40,7 +41,7 @@ h1{
   {
     text-align: left;
   }
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     .news-types {
       font-size: 3.5vw;
     }

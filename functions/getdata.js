@@ -65,8 +65,8 @@ let userSelDoc = newsVar + "-news";
     try 
     {
       const data = await queryCol.find({});
-      catArr = data.map((doc) => doc.toObject()); // Convert MongoDB documents to plain objects
       delete mongoose.connection.models[userSelDoc];
+      catArr = data.map((doc) => doc.toObject()); // Convert MongoDB documents to plain objects
      // queryCol = ''
     } catch (error) 
     {
