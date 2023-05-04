@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './Main.css';
 import Sidebar from './Sidebar.js'
-import Category from './Category';
+import Category from './Category.js';
 //import { useRoute } from 'react-router5';
 //import styles from './App.module.css'
 

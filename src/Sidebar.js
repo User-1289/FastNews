@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './sidebar.css';
-import Category from './Category'
 
 function Sidebar(props) {
     const [sidebar, showSidebar] = useState(false)

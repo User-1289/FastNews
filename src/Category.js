@@ -16,7 +16,8 @@ export default function Category(props) {
 
 
   useEffect(() => {
-      if (window.innerWidth <= 768) {
+    //alert(windowSize.width)
+      if (windowSize.width <= 768) {
         setIsMobile(true);
       } else {
         setIsMobile(false);
@@ -61,11 +62,15 @@ export default function Category(props) {
 
   function displayCat(categoryVal) 
   {
+   // alert(isMobile)
+    if(isMobile===true)
+    {
     document.getElementById('root').style.opacity = "1"
         document.querySelector(".sidebar").style.display = "none"
         document.querySelector(".category-txt").style.display = "none"    
         document.querySelector(".menu-cl").style.display = "inline"
         document.querySelector(".cancel-cl").style.display = "none"
+    }
     const spanText = spanRef.current.getAttribute('val');
     setSpanTxt(spanText);
     getSelCat(categoryVal);
