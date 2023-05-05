@@ -46,7 +46,6 @@ export default function Category(props)
 
   async function getSelCat(catVal) {
     try {
-      console.log(catVal)
       let response = await fetch('/.netlify/functions/getdata', {
         method: 'POST',
         body: JSON.stringify({ newsVar: catVal }),

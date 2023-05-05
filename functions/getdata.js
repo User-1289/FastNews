@@ -81,6 +81,7 @@ let userSelDoc = newsVar + "-news";
   } 
   else 
   {
+
     createCol = mongoose.model(newsVar + '-news', createSchema);
 let newsArr;
 fetch(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`)
