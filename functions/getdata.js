@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const CatCol = require("./models/allnews");
 require("dotenv").config()
+const axios = require('axios');
 
 const createSchema = new mongoose.Schema({
   author:String,
@@ -84,10 +85,8 @@ let userSelDoc = newsVar + "-news";
   {
     createCol = mongoose.model(newsVar + '-news', createSchema);
 let newsArr;
-fetch(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`)
-.then(responce => responce.json())
-    .then((data) =>
-    {
+const response = await axios.get(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`);
+const data = response.data;
        newsArr = data.articles;
       for (let i = 0; i <= 19; i++) 
       {
@@ -110,10 +109,7 @@ fetch(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=pop
             console.log('Error saving document to MongoDB Atlas:', error);
           });
       }
-    }).catch(error => 
-      {
-      console.log('Error fetching news from API:', error);
-    });
+    }
     }
 
     delete mongoose.connection.models[userSelDoc];
@@ -128,4 +124,3 @@ fetch(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=pop
       statusCode: 404,
       body: JSON.stringify({ message: "Saved" }),
     };
-  }
