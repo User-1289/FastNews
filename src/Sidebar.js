@@ -2,7 +2,7 @@ import React, {useState } from 'react';
 import './sidebar.css';
 
 function Sidebar(props) {
-    //const [sidebar, showSidebar] = useState(false)
+    const [sidebar, showSidebar] = useState(false)
 //    const [news, setNews] = useState([])
 
    

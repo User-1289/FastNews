@@ -57,9 +57,9 @@ export default function Category(props)
     }
   }
 
-  const delCategory = () => {
-    deleteContainer(true);
-  };
+ // const delCategory = () => {
+ //   deleteContainer(true);
+ // };
 
   function displayCat(categoryVal) 
   {
@@ -73,8 +73,12 @@ export default function Category(props)
         document.querySelector(".cancel-cl").style.display = "none"
     }
     const spanText = spanRef.current.getAttribute('val');
-    setSpanTxt(spanText);
-    getSelCat(categoryVal);
+   // setSpanTxt(spanText);
+   async function takeData()
+   {
+    await getSelCat(categoryVal);
+   }
+   takeData()
   }
 
   useEffect(() => {

@@ -84,11 +84,10 @@ let userSelDoc = newsVar + "-news";
   } 
   else 
   {
-    delete mongoose.connection.models[userSelDoc];
 
     createCol = mongoose.model(newsVar + '-news', createSchema);
 let newsArr;
-fetch(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-01&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`)
+fetch(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`)
 .then(responce => responce.json())
     .then((data) =>
     {
@@ -119,6 +118,8 @@ fetch(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-01&sortBy=pop
       console.log('Error fetching news from API:', error);
     });
     }
+
+    delete mongoose.connection.models[userSelDoc];
     let getCats = await CatCol.findOneAndUpdate(
       { _id: '644f9c895ad961b86fd0ae26' },
       { $push: { Category: newsConv } },
