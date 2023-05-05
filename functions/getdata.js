@@ -85,8 +85,10 @@ let userSelDoc = newsVar + "-news";
   {
     createCol = mongoose.model(newsVar + '-news', createSchema);
 let newsArr;
-const response = await axios.get(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`);
-const data = response.data;
+fetch(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`)
+.then(responce => responce.json())
+    .then((data) =>
+    {
        newsArr = data.articles;
       for (let i = 0; i <= 19; i++) 
       {
@@ -109,7 +111,10 @@ const data = response.data;
             console.log('Error saving document to MongoDB Atlas:', error);
           });
       }
-    }
+    }).catch(error => 
+      {
+      console.log('Error fetching news from API:', error);
+    });
     }
 
     delete mongoose.connection.models[userSelDoc];
@@ -124,3 +129,4 @@ const data = response.data;
       statusCode: 404,
       body: JSON.stringify({ message: "Saved" }),
     };
+  }
