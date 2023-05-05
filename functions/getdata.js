@@ -15,6 +15,7 @@ const createSchema = new mongoose.Schema({
 
 exports.handler = async (event, context) => {
   let newsVar = JSON.parse(event.body).newsVar;
+ // console.log(news)
   let isExisting = false;
   let newsConv;
   let arr = [];
@@ -38,8 +39,8 @@ exports.handler = async (event, context) => {
     };
   }
 
-  newsConv =
-    newsVar.charAt(0).toUpperCase() + newsVar.slice(1) + "Col";
+  newsConv = newsVar.charAt(0).toUpperCase() + newsVar.slice(1) + "Col";
+
   for (let i = 0; i < arr[0].Category.length; i++) {
     if (arr[0].Category[i] == newsConv) {
       // queryCol = arr[0].Category[i]
@@ -79,7 +80,8 @@ exports.handler = async (event, context) => {
         `https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`
       );
       newsArr = response.data.articles;
-      for (let i = 0; i <= 19; i++) {
+      for (let i = 0; i <= 19; i++) 
+      {
         let myDocument = new createCol({
           author: newsArr[i].author,
           content: newsArr[i].content,
@@ -112,7 +114,7 @@ exports.handler = async (event, context) => {
     }
     }
     
-    delete mongoose.connection.models[userSelDoc];
+    //delete mongoose.connection.models[userSelDoc];
     
     let getCats = await CatCol.findOneAndUpdate(
     { _id: "644f9c895ad961b86fd0ae26" },
