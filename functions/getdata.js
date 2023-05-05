@@ -14,8 +14,6 @@ const createSchema = new mongoose.Schema({
 });
 exports.handler = async (event, context) => {
   let newsVar = JSON.parse(event.body).newsVar;
-  let currentNews = JSON.parse(event.body).currentNews;
-
   let isExisting = false;
   let newsConv;
   let arr = [];
