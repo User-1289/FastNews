@@ -1,8 +1,6 @@
-
 const mongoose = require("mongoose");
 const CatCol = require("./models/allnews");
 require("dotenv").config()
-const axios = require('axios');
 
 const createSchema = new mongoose.Schema({
   author:String,
