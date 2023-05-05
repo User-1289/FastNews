@@ -43,10 +43,12 @@ exports.handler = async (event, context) => {
 
   for (let i = 0; i < arr[0].Category.length; i++) {
     if (arr[0].Category[i] == newsConv) {
+      console.log('i exists')
       // queryCol = arr[0].Category[i]
       isExisting = true;
       break;
     } else {
+      console.log("i don't exist")
       // delete mongoose.connection.models[newsVar + '-news'];
       isExisting = false;
     }
@@ -72,12 +74,13 @@ exports.handler = async (event, context) => {
       statusCode: 200,
       body: JSON.stringify(catArr),
     };
-  } else if (isExisting === false) {
+  } else if (isExisting === false) 
+  {
     let createCol = mongoose.model(newsVar + "-news", createSchema);
     let newsArr;
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`
+        `https://newsapi.org/v2/everything?q=${newsVar}&langauge=en&apiKey=eab1631abf374798bc855fffdc90194f`
       );
       newsArr = response.data.articles;
       for (let i = 0; i <= 19; i++) 
@@ -113,8 +116,7 @@ exports.handler = async (event, context) => {
       };
     }
     }
-    
-    //delete mongoose.connection.models[userSelDoc];
+    delete mongoose.connection.models[userSelDoc];
     
     let getCats = await CatCol.findOneAndUpdate(
     { _id: "644f9c895ad961b86fd0ae26" },

@@ -25,6 +25,14 @@ export default function Category(props)
       }
 }, [])
 
+let defaultCat = ["games", "politics", "health"]
+useEffect(() =>
+{
+  if(localStorage.getItem("Categories")==null)
+  {
+    localStorage.setItem("Categories", JSON.stringify(defaultCat))
+  }
+}, [])
   useEffect(() => {
     setCatArr(JSON.parse(localStorage.getItem("Categories")))
   }, []);
@@ -39,7 +47,7 @@ export default function Category(props)
     let newArr = [...catArr];
     newArr.push(category);
      setCatArr(newArr);
-    localStorage.setItem("Categories", JSON.stringify(newArr))
+    localStorage.setItem("Categories", JSON.stringify(WebGLProgram))
     setCategory('');
     await getSelCat(category);
   };
