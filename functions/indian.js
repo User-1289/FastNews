@@ -1,26 +1,15 @@
-const mongoose = require("mongoose");
-const IndianCol = require("./models/indian-model");
-require('dotenv').config
-console.log(process.env.DB_URI)
 exports.handler = async function(event, context) {
-  let arr = [];
-  try { 
-    await mongoose.connect(process.env.DB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-
-    const data = await IndianCol.find({});
-    arr = data.map(doc => doc.toObject()); // Convert MongoDB documents to plain objects
+  try {
+    const response = await fetch(`https://newsapi.org/v2/everything?q=coding&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`);
+    const data = await response.json();
     return {
       statusCode: 200,
-      body: JSON.stringify(arr)
+      body: JSON.stringify(data),
     };
   } catch (error) {
-    console.log("Error connecting to MongoDB Atlas:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: "Internal server error: " + error.message })
+      body: JSON.stringify({ message: error.message }),
     };
   }
 };
