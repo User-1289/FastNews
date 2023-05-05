@@ -3,6 +3,15 @@ const mongoose = require("mongoose");
 const CatCol = require("./models/allnews");
 require("dotenv").config()
 
+const createSchema = new mongoose.Schema({
+  author:String,
+  content:String,
+  description:String,
+  publishedAt:String,
+  title:String,
+  url:String,
+  urlToImage:String
+});
 exports.handler = async (event, context) => {
   let newsVar = JSON.parse(event.body).newsVar;
   let isExisting = false;
@@ -73,15 +82,6 @@ let userSelDoc = newsVar + "-news";
   } 
   else 
   {
-    const createSchema = new mongoose.Schema({
-      author:String,
-      content:String,
-      description:String,
-      publishedAt:String,
-      title:String,
-      url:String,
-      urlToImage:String
-    });
     createCol = mongoose.model(newsVar + '-news', createSchema);
 let newsArr;
 fetch(`https://newsapi.org/v2/everything?q=${newsVar}&from=2023-05-03&sortBy=popularity&apiKey=eab1631abf374798bc855fffdc90194f`)
