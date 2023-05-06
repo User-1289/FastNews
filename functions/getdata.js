@@ -30,7 +30,7 @@ exports.handler = async (event, context) => {
     });
     const docs = await CatCol.find().exec();
     arr = docs;
-    delete mongoose.connection.models["News-category"];
+    delete mongoose.connection.models["news-category"];
   } catch (err) {
     console.log(err);
     return {
@@ -119,7 +119,7 @@ exports.handler = async (event, context) => {
     delete mongoose.connection.models[userSelDoc];
     
     let getCats = await CatCol.findOneAndUpdate(
-    { _id: "644f9c895ad961b86fd0ae26" },
+    { _id: "645686c39e2459f0b58b16f7" },
     { $push: { Category: newsConv } },
     { new: true }
     );

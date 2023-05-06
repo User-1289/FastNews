@@ -5,8 +5,6 @@ body{
 .sidebar {
   display: inline;
   background-color: rgba(255, 255, 255, 0.1);
-
-    height:100%;
     width:200px;
     position: absolute;
     top: 10%;
