@@ -13,6 +13,7 @@ export default function Category(props)
   //const [container, deleteContainer] = useState(false);//to delete the container
   const [catArr, setCatArr] = useState([]);//this array contains all the categories user entered
   const [newsData, setNewsData] = useState([]);//this is used to send data to the app.js to diisplay news there
+  let isBad;
  // const [spanTxt, setSpanTxt] = useState('');
 
 
@@ -44,14 +45,47 @@ useEffect(() =>
 
   const saveCategory = async () => 
   {
-    let newArr = [...catArr];
-    newArr.push(category);
-     setCatArr(newArr);
-    localStorage.setItem("Categories", JSON.stringify(WebGLProgram))
-    setCategory('');
-    await getSelCat(category);
-  };
+    const url = 'https://neutrinoapi-bad-word-filter.p.rapidapi.com/bad-word-filter';
+const options = {
+	method: 'POST',
+	headers: {
+		'content-type': 'application/x-www-form-urlencoded',
+		'X-RapidAPI-Key': '49b7bab626msh498c06584a07ddap19f6ecjsne5ed854a929c',
+		'X-RapidAPI-Host': 'neutrinoapi-bad-word-filter.p.rapidapi.com'
+	},
+	body: new URLSearchParams({
+		content: category,
+	})
+};
 
+try 
+{
+	const response = await fetch(url, options);
+	const result = await response.text();
+
+  const jsonBad = JSON.parse(result); // Parse the JSON string into a JavaScript object
+
+ isBad = jsonBad['is-bad']; // Access the value of the 'is-bad' property using bracket notation
+
+console.log(isBad); // Output: true
+if(isBad===true)
+{
+  alert("You requested inappropriate category")
+  setCategory("")
+  return;
+}
+	console.log(result);
+}
+ catch (error) {
+	console.error(error);
+}
+let newArr = [...catArr];
+newArr.push(category);
+ setCatArr(newArr);
+localStorage.setItem("Categories", JSON.stringify(newArr))
+setCategory('');
+await getSelCat(category);
+  }
   async function getSelCat(catVal) {
     try {
       let response = await fetch('/.netlify/functions/getdata', {
@@ -71,6 +105,7 @@ useEffect(() =>
 
   function displayCat(categoryVal) 
   {
+      props.newsName(categoryVal);
    // alert(isMobile)
     if(isMobile===true)
     {
@@ -80,6 +115,7 @@ useEffect(() =>
         document.querySelector(".menu-cl").style.display = "inline"
         document.querySelector(".cancel-cl").style.display = "none"
     }
+
     const spanText = spanRef.current.getAttribute('val');
    // setSpanTxt(spanText);
    async function takeData()
@@ -92,6 +128,23 @@ useEffect(() =>
   useEffect(() => {
     props.sendNews(newsData);
   }, [newsData, props]);
+
+  function deleteCat(e)
+  {
+  //  alert(e.target.parentElement.innerText.replace("delete", ""))
+    let currentCats = JSON.parse(localStorage.getItem("Categories"))
+    for(let i = 0; i < currentCats.length; i++)
+    {
+      if(currentCats[i]===e.target.parentElement.innerText.replace("delete", ""))
+      {
+        currentCats.splice(i, 1)
+        localStorage.setItem("Categories", JSON.stringify(currentCats))
+        setCatArr(currentCats)
+         // alert('exists')
+          return;
+      }
+  }
+}
   return (
     <>
       <div className='category-txt'>
@@ -113,7 +166,7 @@ useEffect(() =>
                 className="cat-txt">
                 {cat}
               </span>
-              <span className="material-symbols-outlined">delete</span>
+              <span onClick={deleteCat} className="material-symbols-outlined">delete</span>
             </div><br/>
             </>
           ))}

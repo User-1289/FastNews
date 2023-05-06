@@ -13,7 +13,6 @@ function App(props)
   const [newsType, setNewsType] = useState("World")
   const [catArr, setCatArr] = useState([])
 
-
     useEffect(() => {
       if(catArr.length>0)
       {
@@ -50,7 +49,7 @@ function App(props)
 
   return (
     <>
-      <div className='nav-bar'>
+      <div className='nav-bar'> 
         <span onClick={(event) => getNews(event)} className='news-types'>World News</span>
         <span onClick={(event) => getNews(event)} className='news-types'>Indian News</span>
         <span onClick={(event) => getNews(event)} className='news-types'>Technology News</span>
@@ -60,7 +59,7 @@ function App(props)
       </div><br/>    
       <h1>{news}</h1>
       <Sidebar/>
-      <Category sendNews={news => setCatArr(news)}/>
+      <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}/> 
       <center>
       <div className='news-container'>
         {arr.map((obj, index) => (
