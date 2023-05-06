@@ -60,7 +60,8 @@ function App(props)
       <h1>{news}</h1>
       <Sidebar/>
       <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}/> 
-      <center>
+      <div className='align-news'>
+        <center>
       <div className='news-container'>
         {arr.map((obj, index) => (
           <div key={index}>
@@ -72,6 +73,7 @@ function App(props)
           ))}
       </div>
       </center>
+      </div>
     </>
   );
 }

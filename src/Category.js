@@ -74,13 +74,19 @@ if(isBad===true)
   setCategory("")
   return;
 }
-	console.log(result);
+	//console.log(result);
 }
  catch (error) {
 	console.error(error);
 }
 let newArr = [...catArr];
 newArr.push(category);
+if(newArr.length>5)
+{
+  alert("You can only create 5 categories")
+  setCategory('');
+  return;
+}
  setCatArr(newArr);
 localStorage.setItem("Categories", JSON.stringify(newArr))
 setCategory('');
@@ -120,7 +126,7 @@ await getSelCat(category);
    // setSpanTxt(spanText);
    async function takeData()
    {
-    await getSelCat(categoryVal);
+    await getSelCat(categoryVal.toLowerCase());
    }
    takeData()
   }
