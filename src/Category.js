@@ -50,7 +50,7 @@ const options = {
 	method: 'POST',
 	headers: {
 		'content-type': 'application/x-www-form-urlencoded',
-		'X-RapidAPI-Key': '49b7bab626msh498c06584a07ddap19f6ecjsne5ed854a929c',
+		'X-RapidAPI-Key': process.env.API_KEY,
 		'X-RapidAPI-Host': 'neutrinoapi-bad-word-filter.p.rapidapi.com'
 	},
 	body: new URLSearchParams({
@@ -137,11 +137,13 @@ await getSelCat(category);
 
   function deleteCat(e)
   {
+    //deleting form frontend
+    let orgCat = e.target.parentElement.innerText.replace("delete", "")
   //  alert(e.target.parentElement.innerText.replace("delete", ""))
     let currentCats = JSON.parse(localStorage.getItem("Categories"))
     for(let i = 0; i < currentCats.length; i++)
     {
-      if(currentCats[i]===e.target.parentElement.innerText.replace("delete", ""))
+      if(currentCats[i]==orgCat)
       {
         currentCats.splice(i, 1)
         localStorage.setItem("Categories", JSON.stringify(currentCats))
@@ -150,6 +152,17 @@ await getSelCat(category);
           return;
       }
   }
+//deleting from backend
+  async function deleteData()
+  {
+  let responce = await fetch('/.netlify/functions/delete-news', {
+    method: 'POST',
+    body: JSON.stringify({ categoryName: orgCat}),
+  })
+    const delData = await responce.json();
+    console.log(delData)
+  }
+    deleteData()
 }
   return (
     <>

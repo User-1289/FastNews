@@ -23,7 +23,6 @@ function App(props)
 
   async function getNews(event) {
     try {
-
       const news = event.target.innerText;
       const newsCut = news.split(' ');
       if(newsType===newsCut[0])
