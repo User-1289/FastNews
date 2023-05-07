@@ -155,6 +155,7 @@ await getSelCat(category);
 //deleting from backend
   async function deleteData()
   {
+    alert('going to delete')
   let responce = await fetch('/.netlify/functions/delete-news', {
     method: 'POST',
     body: JSON.stringify({ categoryName: orgCat}),
