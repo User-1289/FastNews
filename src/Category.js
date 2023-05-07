@@ -145,6 +145,7 @@ await getSelCat(category);
     {
       if(currentCats[i]==orgCat)
       {
+        deleteData()
         currentCats.splice(i, 1)
         localStorage.setItem("Categories", JSON.stringify(currentCats))
         setCatArr(currentCats)
@@ -163,7 +164,6 @@ await getSelCat(category);
     const delData = await responce.json();
     console.log(delData)
   }
-    deleteData()
 }
   return (
     <>
