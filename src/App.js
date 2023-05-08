@@ -49,12 +49,12 @@ function App(props)
   return (
     <>
       <div className='nav-bar'> 
-        <span onClick={(event) => getNews(event)} className='news-types'>World News</span>
-        <span onClick={(event) => getNews(event)} className='news-types'>Indian News</span>
-        <span onClick={(event) => getNews(event)} className='news-types'>Technology News</span>
-        <span onClick={(event) => getNews(event)} className='news-types'>Business News</span>
-        <span onClick={(event) => getNews(event)} className='news-types'>Sports News</span>
-        <span onClick={(event) => getNews(event)} className='news-types'>Entertainment News</span>
+        <button onClick={(event) => getNews(event)} className='news-types'>World News</button>
+        <button onClick={(event) => getNews(event)} className='news-types'>Indian News</button>
+        <button onClick={(event) => getNews(event)} className='news-types'>Technology News</button>
+        <button onClick={(event) => getNews(event)} className='news-types'>Business News</button>
+        <button onClick={(event) => getNews(event)} className='news-types'>Sports News</button>
+        <button onClick={(event) => getNews(event)} className='news-types'>Entertainment News</button>
       </div><br/>    
       <h1>{news}</h1>
       <Sidebar/>

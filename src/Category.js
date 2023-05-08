@@ -145,7 +145,6 @@ await getSelCat(category);
     {
       if(currentCats[i]==orgCat)
       {
-       // deleteData()
         currentCats.splice(i, 1)
         localStorage.setItem("Categories", JSON.stringify(currentCats))
         setCatArr(currentCats)
