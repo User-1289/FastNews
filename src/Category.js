@@ -63,11 +63,10 @@ try
 	const response = await fetch(url, options);
 	const result = await response.text();
 
-  const jsonBad = JSON.parse(result); // Parse the JSON string into a JavaScript object
+  const jsonBad = JSON.parse(result); 
+ isBad = jsonBad['is-bad']; 
 
- isBad = jsonBad['is-bad']; // Access the value of the 'is-bad' property using bracket notation
-
-console.log(isBad); // Output: true
+console.log(isBad); 
 if(isBad===true)
 {
   alert("You requested inappropriate category")
@@ -81,9 +80,9 @@ if(isBad===true)
 }
 let newArr = [...catArr];
 newArr.push(category);
-if(newArr.length>5)
+if(newArr.length>10)
 {
-  alert("You can only create 5 categories")
+  alert("You can only create 10 categories")
   setCategory('');
   return;
 }
@@ -105,17 +104,13 @@ await getSelCat(category);
     }
   }
 
- // const delCategory = () => {
- //   deleteContainer(true);
- // };
-
   function displayCat(categoryVal) 
   {
       props.newsName(categoryVal);
    // alert(isMobile)
     if(isMobile===true)
     {
-    document.getElementById('root').style.opacity = "1"
+        document.getElementById('root').style.opacity = "1"
         document.querySelector(".sidebar").style.display = "none"
         document.querySelector(".category-txt").style.display = "none"    
         document.querySelector(".menu-cl").style.display = "inline"
@@ -145,6 +140,7 @@ await getSelCat(category);
     {
       if(currentCats[i]==orgCat)
       {
+        deleteData()
         currentCats.splice(i, 1)
         localStorage.setItem("Categories", JSON.stringify(currentCats))
         setCatArr(currentCats)
@@ -153,22 +149,22 @@ await getSelCat(category);
       }
   }
 //deleting from backend
- // async function deleteData()
- // {
- //   alert('going to delete')
- // let responce = await fetch('/.netlify/functions/delete-news', {
- //   method: 'POST',
- //   body: JSON.stringify({ categoryName: orgCat}),
- // })
- //   const delData = await responce.json();
- //   console.log(delData)
- // }
+  async function deleteData()
+  {
+  let responce = await fetch('/.netlify/functions/delete', {
+    method: 'POST',
+    body: JSON.stringify({ categoryName: orgCat.toLowerCase()}),
+  })
+    const delData = await responce.json();
+    alert('Successfully deleted')
+    console.log(delData)
+  }
 }
   return (
     <>
-      <div className='category-txt'>
+      <div className='category-txt'><br/>
         <div className='input-container'>
-        <input id="category-input" onChange={setCatVal} value={category} />
+        <input placeholder='add your interest' id="category-input" onChange={setCatVal} value={category} />
         <span onClick={saveCategory} className="material-symbols-outlined">
           check_circle
         </span>

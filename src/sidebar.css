@@ -1,55 +1,56 @@
 body{
-    color: white;
+  color: white;
 }
 
 .sidebar {
-  display: inline;
-  background-color: rgba(255, 255, 255, 0.1);
-    width:200px;
-    position: absolute;
-    top: 10%;
-    left: 0;
-  }
-  
-  .sidebar button {
+display: inline;
+background-color: rgba(255, 255, 255, 0.1);
+  width:200px;
+  position: absolute;
+  top: 10%;
+  left: 0;
+}
+
+.sidebar button {
 background: none;
-    font-size: 23px;
-    color: white;
-    display: inline;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  .sidebar a:hover {
-    color: #f1f1f1;
+  font-size: 23px;
+  color: white;
+  display: inline;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 15%;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+.mobile-sidebar{
+  display: none;
+}
+.cancel-cl{
+  display: none;
+}
+@media (max-width: 768px) 
+{
+  .sidebar{
+    display: none;
   }
   .mobile-sidebar{
-    display: none;
-  }
-  .cancel-cl{
-    display: none;
-  }
-  @media (max-width: 768px) 
-  {
-    .sidebar{
-      display: none;
-    }
-    .mobile-sidebar{
-      display: inline;
-      position: absolute;
-      top:10%;
-      bottom: 0;
-    }
-    .material-symbols-outlined {
-      cursor: pointer;
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 48
-  }
-  .cancel-cl{
     display: inline;
-    float: right;
+    position: absolute;
+    top:10%;
+    bottom: 0;
   }
+  .material-symbols-outlined {
+    cursor: pointer;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+.cancel-cl{
+  display: inline;
+  float: right;
+}
 }
