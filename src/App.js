@@ -21,6 +21,20 @@ function App(props)
       }
   }, [catArr]);
 
+useEffect(() =>
+{
+  async function defaultNews()
+  {
+  let responce = await fetch('/.netlify/functions/getdata', {
+    method: 'POST',
+    body: JSON.stringify({ newsVar: 'world'}),
+  })
+    const data = await responce.json();
+   //return
+    setArr(data);
+  }
+  defaultNews()
+}, [])
   async function getNews(event) {
     try {
       const news = event.target.innerText;
