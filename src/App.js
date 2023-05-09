@@ -81,6 +81,12 @@ useEffect(() =>
             <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
             <div className='author-txt'>{obj.author}</div>
              <a rel="noreferrer" target="_blank" href={obj.url} key={index}><h2>{obj.title}</h2></a>
+             <span>
+             <details>
+              <summary>view more</summary>
+              <div>{obj.description}</div>
+             </details>
+             </span>
               <hr/>
           </div>
           ))}
