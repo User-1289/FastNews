@@ -31,7 +31,7 @@ function Sidebar(props) {
         <span onClick={showMobSide} className="material-symbols-outlined menu-cl">menu</span>
         </div>
         <nav className="sidebar">
-            <button onClick={showCat}>Add a category</button>
+            <button onClick={showCat}>Personalize news feed</button>
             <span onClick={closeSidebar} className="material-symbols-outlined cancel-cl">cancel</span><br/>
         </nav>
         </>
