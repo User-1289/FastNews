@@ -29,6 +29,8 @@ background: black;
 }
 .cancel-cl{
   display: none;
+background: black;
+  color: white;
 }
 @media (max-width: 768px) 
 {
@@ -42,7 +44,6 @@ background: black;
     bottom: 0;
   }
   .material-symbols-outlined {
-    color: white;
     cursor: pointer;
   font-variation-settings:
   'FILL' 0,
@@ -53,7 +54,5 @@ background: black;
 .cancel-cl{
   display: inline;
   float: right;
-  position: relative;
-  top:15%;
 }
 }
