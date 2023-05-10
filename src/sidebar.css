@@ -29,7 +29,7 @@ background: black;
 }
 .cancel-cl{
   display: none;
-background: black;
+  background: black;
   color: white;
 }
 @media (max-width: 768px) 
