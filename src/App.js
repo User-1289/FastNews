@@ -88,6 +88,7 @@ useEffect(() =>
              </details>
              </span>
               <hr/>
+              <span className='ad-container'></span>
           </div>
           ))}
       </div>

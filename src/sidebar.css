@@ -12,13 +12,13 @@ background-color: rgba(255, 255, 255, 0.1);
 }
 
 .sidebar button {
-background: none;
-  font-size: 23px;
+background: gray;
+  font-size: 20px;
   color: white;
   display: inline;
   border-radius: 10px;
   cursor: pointer;
-  margin: 15%;
+  margin: 20%;
 }
 
 .sidebar a:hover {

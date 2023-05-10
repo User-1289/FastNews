@@ -48,6 +48,9 @@ width: 100%;
   {
     text-align: left;
   }
+  .ad-container{
+    float: right;
+  }
   @media only screen and (max-width: 768px) {
     .news-types {
       font-size: 3.5vw;
