@@ -86,7 +86,7 @@ exports.handler = async (event, context) => {
       for (let i = 0; i <= 19; i++) 
       {
         let myDocument = new createCol({
-          author: newsArr[i].author,
+          author: newsArr[i].source.name,
           content: newsArr[i].content,
           description: newsArr[i].description,
           publishedAt: newsArr[i].publishedAt,
