@@ -22,7 +22,8 @@ width: 100%;
     text-align: center;
   }
   .news-container{
-    padding-right: 30px;
+    position: absolute;
+    right:30%;
     text-align: center;
     width:70%;
     height:auto;
