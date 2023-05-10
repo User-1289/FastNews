@@ -160,7 +160,7 @@ await getSelCat(category);
   }
 }
   return (
-    <><br/>
+    <>
       <div className='category-txt'><br/>
         <div className='input-container'>
         <input placeholder='add your interest' id="category-input" onChange={setCatVal} value={category} />

@@ -7,18 +7,18 @@ display: inline;
 background-color: rgba(255, 255, 255, 0.1);
   width:200px;
   position: absolute;
-  top: 10%;
+  top: 15%;
   left: 0;
+  color: black;
 }
 
 .sidebar button {
-background: gray;
-  font-size: 20px;
-  color: black;
+background: black;
+  font-size: 15px;
+  color: white;
   display: inline;
   border-radius: 10px;
   cursor: pointer;
-  margin: 20%;
 }
 
 .sidebar a:hover {
@@ -42,6 +42,7 @@ background: gray;
     bottom: 0;
   }
   .material-symbols-outlined {
+    color: white;
     cursor: pointer;
   font-variation-settings:
   'FILL' 0,
@@ -52,5 +53,7 @@ background: gray;
 .cancel-cl{
   display: inline;
   float: right;
+  position: relative;
+  top:15%;
 }
 }
