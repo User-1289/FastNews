@@ -23,7 +23,7 @@ width: 100%;
   }
   .news-container{
     position: absolute;
-    right:30%;
+    left:30%;
     text-align: center;
     width:70%;
     height:auto;
