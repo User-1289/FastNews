@@ -59,6 +59,7 @@ width: 100%;
       font-size: 25px;
     }
     .news-container{
+      padding-left: 10px;
       width: 100%;
     }
     .news-container img{
