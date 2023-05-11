@@ -84,7 +84,7 @@ useEffect(() =>
              <span>
              <details>
               <summary>view more</summary>
-              <div>{obj.description}</div>
+              <div >{obj.description}</div>
              </details>
              </span>
               <hr/>
