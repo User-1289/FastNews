@@ -50,7 +50,7 @@ width: 100%;
   .ad-container{
     float: right;
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 800px) {
     .news-types {
       font-size: 3.5vw;
     }
