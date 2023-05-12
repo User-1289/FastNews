@@ -4,7 +4,7 @@ body{
 
 .sidebar {
 display: inline;
-background-color: rgba(255, 255, 255, 0.1);
+background-color: gray;
   width:200px;
   position: absolute;
   top: 15%;
@@ -13,7 +13,9 @@ background-color: rgba(255, 255, 255, 0.1);
 }
 
 .sidebar button {
-background: black;
+  font-family: sans-serif;
+  font-weight: bold;
+background: gray;
   font-size: 15px;
   color: white;
   display: inline;
@@ -29,12 +31,13 @@ background: black;
 }
 .cancel-cl{
   display: none;
-  background: black;
+  background: gray;
   color: white;
 }
 @media (max-width: 800px) 
 {
   .sidebar{
+    background: gray;
     display: none;
   }
   .mobile-sidebar{
@@ -52,6 +55,7 @@ background: black;
   'opsz' 48
 }
 .cancel-cl{
+  background: none;
   display: inline;
   float: right;
 }

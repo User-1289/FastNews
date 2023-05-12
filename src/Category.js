@@ -168,7 +168,7 @@ await getSelCat(category);
           check_circle
         </span>
         </div>
-        <div>
+        <div className='sidebar-txt'>
           <br />
           {catArr.map((cat, index) => (
             <>

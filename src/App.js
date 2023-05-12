@@ -3,9 +3,6 @@ import './Main.css';
 import Sidebar from './Sidebar'
 import Category from './Category';
 
-//import { useRoute } from 'react-router5';
-//import styles from './App.module.css'
-
 function App(props) 
 {
   const [news, setNews] = useState("News");
