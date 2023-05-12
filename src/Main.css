@@ -7,7 +7,6 @@ h1{
   color: white;
 }
 .nav-bar {
-  position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
