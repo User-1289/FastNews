@@ -7,6 +7,7 @@ function Sidebar(props) {
 
    
     const showCat = () => {
+        document.getElementById('category-input').focus()
         showSidebar(true);
     }
     function showMobSide()
