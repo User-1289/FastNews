@@ -33,7 +33,7 @@ text-transform: capitalize;
     display: inline;
     background-color: gray;
         position: absolute;
-        top: 27%;
+        top: 24%;
         left: 0;
         width: 190px;
         height: 500px;
@@ -55,6 +55,9 @@ input::placeholder{
     .category-txt{
         background: gray;
       display: none;
+      position: absolute;
+      top: 27%;
+      left: 0;
     }
 
   }

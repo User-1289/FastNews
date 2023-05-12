@@ -24,7 +24,7 @@ useEffect(() =>
   {
   let responce = await fetch('/.netlify/functions/getdata', {
     method: 'POST',
-    body: JSON.stringify({ newsVar: 'world'}),
+    body: JSON.stringify({ newsVar: 'world', uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
   })
     const data = await responce.json();
    //return
@@ -46,7 +46,7 @@ useEffect(() =>
      // const response = await fetch(`/.netlify/functions/${lNews}`);
      let responce = await fetch('/.netlify/functions/getdata', {
       method: 'POST',
-      body: JSON.stringify({ newsVar: lNews}),
+      body: JSON.stringify({ newsVar: lNews, uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
     })
       const data = await responce.json();
      //return
