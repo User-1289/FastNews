@@ -5,8 +5,13 @@ body{
 h1{
   text-align: center;
   color: white;
+  position: fixed;
+  top:10%;
+  right:40%;
+  left:40%;
 }
 .nav-bar {
+  position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;

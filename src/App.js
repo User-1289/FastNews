@@ -5,6 +5,17 @@ import Category from './Category';
 
 function App(props) 
 {
+  const [lastScrollX, setLastScrollX] = useState(0);
+
+  function handleScroll() {
+    const currentScrollX = window.scrollX;
+    if (currentScrollX > lastScrollX) {
+      // Scrolled right
+      // Call your function here
+      console.log('Scrolled right!');
+    }
+    setLastScrollX(currentScrollX);
+  }
   const [news, setNews] = useState("News");
   const [arr, setArr] = useState([]);
   const [newsType, setNewsType] = useState("World")
@@ -66,13 +77,13 @@ useEffect(() =>
         <button onClick={(event) => getNews(event)} className='news-types'>Business News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Sports News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Entertainment News</button>
-      </div><br/>    
+      </div>    
       <h1>{news}</h1>
       <Sidebar/>
       <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}/> 
       <div className='align-news'>
         <center>
-      <div className='news-container'>
+      <div onScroll={handleScroll} className='news-container'>
         {arr.map((obj, index) => (
           <div key={index}>
             <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
