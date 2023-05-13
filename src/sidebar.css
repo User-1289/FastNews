@@ -4,23 +4,16 @@ body{
 
 .sidebar {
 display: inline;
-background-color: gray;
+
   width:190px;
   position: absolute;
-  top: 15%;
+  top: 5%;
   left: 0;
   color: black;
 }
 
 .sidebar button {
-  font-family: sans-serif;
-  font-weight: bold;
-background: gray;
-  font-size: 20px;
-  color: white;
-  display: inline;
-  border-radius: 10px;
-  cursor: pointer;
+
 }
 
 .sidebar a:hover {
@@ -33,11 +26,12 @@ background: gray;
   display: none;
   background: gray;
   color: white;
+
 }
 @media (max-width: 800px) 
 {
   .sidebar{
-    background: gray;
+
     display: none;
   }
   .mobile-sidebar{

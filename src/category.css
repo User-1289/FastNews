@@ -33,13 +33,14 @@ text-transform: capitalize;
     display: inline;
     background-color: gray;
         position: absolute;
-        top: 24%;
+        top: 10%;
         left: 0;
         width: 190px;
-        height: 500px;
+        height: auto;
         border-right: 1px solid #ccc;
         padding: 20px;
         box-sizing: border-box;    
+        border-radius: 10px;
 }
 .input-container{
     display: flex;
@@ -51,13 +52,24 @@ input::placeholder{
     font-style: italic;
     color: rgba(255, 255, 255, 0.3);
 }
+.category-txt button{
+    font-family: sans-serif;
+    font-weight: bold;
+  background: gray;
+    font-size: 15px;
+    color: white;
+    display: inline;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
 @media (max-width: 800px) {
     .category-txt{
         background: gray;
       display: none;
       position: absolute;
-      top: 27%;
-      left: 0;
-    }
+      top: 10%;
 
+    }
   }
+  

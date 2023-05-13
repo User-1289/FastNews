@@ -1,8 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './category.css';
-
+import './sidebar.css'
 export default function Category(props) 
 {
+  function showMobSide()
+  {
+      document.querySelector(".sidebar").style.display = "inline"
+      document.querySelector(".category-txt").style.display = "inline"
+      document.querySelector(".menu-cl").style.display = "none"
+      document.querySelector(".cancel-cl").style.display = "inline"
+      document.getElementById('root').style.opacity = "0.5"
+  }
+  function closeSidebar()
+  {
+      document.getElementById('root').style.opacity = "1"
+      document.querySelector(".sidebar").style.display = "none"
+      document.querySelector(".category-txt").style.display = "none"    
+      document.querySelector(".menu-cl").style.display = "inline"
+      document.querySelector(".cancel-cl").style.display = "none"
+  }
+  const showCat = () => {
+    document.getElementById('category-input').focus()
+}
     const [isMobile, setIsMobile] = useState(false);
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
@@ -104,8 +123,15 @@ await getSelCat(category);
     }
   }
 
-  function displayCat(categoryVal) 
+  function displayCat(categoryVal,event) 
   {
+    let allCats = document.querySelectorAll('.cat-txt')
+    for(let cats of allCats)
+    {
+      cats.style.color = 'black'
+    }
+    event.target.style.color = "blue"
+
       props.newsName(categoryVal);
    // alert(isMobile)
     if(isMobile===true)
@@ -161,7 +187,14 @@ await getSelCat(category);
 }
   return (
     <>
+            <div className='mobile-sidebar'>
+        <span onClick={showMobSide} className="material-symbols-outlined menu-cl">menu</span>
+        </div>
+        <nav className="sidebar">
+            <span onClick={closeSidebar} className="material-symbols-outlined cancel-cl">cancel</span><br/>
+        </nav>
       <div className='category-txt'><br/>
+      <button onClick={showCat}>Personalize your news feed</button><br/>
         <div className='input-container'>
         <input placeholder='add your interest' id="category-input" onChange={setCatVal} value={category} />
         <span onClick={saveCategory} className="material-symbols-outlined">

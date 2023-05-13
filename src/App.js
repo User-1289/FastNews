@@ -7,15 +7,7 @@ function App(props)
 {
   const [lastScrollX, setLastScrollX] = useState(0);
 
-  function handleScroll() {
-    const currentScrollX = window.scrollX;
-    if (currentScrollX > lastScrollX) {
-      // Scrolled right
-      // Call your function here
-      console.log('Scrolled right!');
-    }
-    setLastScrollX(currentScrollX);
-  }
+
   const [news, setNews] = useState("News");
   const [arr, setArr] = useState([]);
   const [newsType, setNewsType] = useState("World")
@@ -43,7 +35,15 @@ useEffect(() =>
   }
   defaultNews()
 }, [])
-  async function getNews(event) {
+  async function getNews(event) 
+  {
+    let allCats = document.querySelectorAll('.news-types')
+    for(let cats of allCats)
+    {
+      cats.style.color = 'black'
+    }
+    event.target.style.color = "blue"
+    //return;
     try {
       const news = event.target.innerText;
       const newsCut = news.split(' ');
@@ -78,12 +78,11 @@ useEffect(() =>
         <button onClick={(event) => getNews(event)} className='news-types'>Sports News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Entertainment News</button>
       </div>    
-      <h1>{news}</h1>
-      <Sidebar/>
+
       <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}/> 
       <div className='align-news'>
         <center>
-      <div onScroll={handleScroll} className='news-container'>
+      <div className='news-container'>
         {arr.map((obj, index) => (
           <div key={index}>
             <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
