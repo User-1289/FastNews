@@ -69,7 +69,7 @@ const options = {
 	method: 'POST',
 	headers: {
 		'content-type': 'application/x-www-form-urlencoded',
-		'X-RapidAPI-Key': process.env.API_KEY,
+		'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
 		'X-RapidAPI-Host': 'neutrinoapi-bad-word-filter.p.rapidapi.com'
 	},
 	body: new URLSearchParams({
@@ -125,12 +125,14 @@ await getSelCat(category);
 
   function displayCat(categoryVal,event) 
   {
+    alert(event.target.innerText)
+   // return;
     let allCats = document.querySelectorAll('.cat-txt')
     for(let cats of allCats)
     {
       cats.style.color = 'black'
     }
-    event.target.style.color = "blue"
+    event.target.style.color = "yellow"
 
       props.newsName(categoryVal);
    // alert(isMobile)
@@ -209,7 +211,7 @@ await getSelCat(category);
               <span
                 val={cat}
                 ref={spanRef}
-                onClick={() => displayCat(cat)}
+                onClick={(e) => displayCat(cat,e)}
                 className="cat-txt">
                 {cat}
               </span>
