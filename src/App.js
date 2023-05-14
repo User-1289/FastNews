@@ -80,7 +80,6 @@ useEffect(() =>
       </div>    
 
       <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}/> 
-      <div className='align-news'>
         <center>
       <div className='news-container'>
         {arr.map((obj, index) => (
@@ -100,7 +99,6 @@ useEffect(() =>
           ))}
       </div>
       </center>
-      </div>
     </>
   );
 }

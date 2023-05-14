@@ -28,6 +28,8 @@ width: 100%;
     text-align: center;
   }
   .news-container{
+    position: absolute;
+    top: 20%;
     text-align: center;
     width:70%;
     height:auto;
