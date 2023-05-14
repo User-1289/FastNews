@@ -20,6 +20,7 @@ width: 100%;
   }
   
   .news-types {
+
     font-size: 2vw;
     padding: 1%;
     color: black;
@@ -28,8 +29,7 @@ width: 100%;
     text-align: center;
   }
   .news-container{
-    position: absolute;
-    top: 20%;
+  margin-top: 5%;
     text-align: center;
     width:70%;
     height:auto;
