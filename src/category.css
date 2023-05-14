@@ -30,10 +30,10 @@ text-transform: capitalize;
     cursor: pointer;
 }
 .category-txt{
-    display: inline;
-    background-color: gray;
+        display: inline;
+        background-color: gray;
         position: absolute;
-        top: 10%;
+        top: 20%;
         left: 0;
         width: 190px;
         height: auto;

@@ -125,14 +125,14 @@ await getSelCat(category);
 
   function displayCat(categoryVal,event) 
   {
-    alert(event.target.innerText)
+    //alert(event.target.innerText)
    // return;
     let allCats = document.querySelectorAll('.cat-txt')
     for(let cats of allCats)
     {
-      cats.style.color = 'black'
+      cats.style.backgroundColor = 'white'
     }
-    event.target.style.color = "yellow"
+    event.target.style.backgroundColor = "skyblue"
 
       props.newsName(categoryVal);
    // alert(isMobile)
