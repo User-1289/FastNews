@@ -6,9 +6,7 @@ input{
 }
 .material-symbols-outlined {
     cursor: pointer;
-    margin: 3px;
-    position: relative;
-    top:4px;
+
   font-variation-settings:
   'FILL' 0,
   'wght' 400,

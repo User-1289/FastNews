@@ -193,9 +193,10 @@ await getSelCat(category);
         <span onClick={showMobSide} className="material-symbols-outlined menu-cl">menu</span>
         </div>
         <nav className="sidebar">
-            <span onClick={closeSidebar} className="material-symbols-outlined cancel-cl">cancel</span><br/>
         </nav>
-      <div className='category-txt'><br/>
+      <div className='category-txt'>
+      <span onClick={closeSidebar} className="material-symbols-outlined cancel-cl">cancel</span><br/>
+        <br/>
       <button onClick={showCat}>Personalize your news feed</button><br/>
         <div className='input-container'>
         <input placeholder='add your interest' id="category-input" onChange={setCatVal} value={category} />

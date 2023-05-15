@@ -82,6 +82,7 @@ useEffect(() =>
       <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}/> 
         <center>
       <div className='news-container'>
+      <br/><br/><br/>
         {arr.map((obj, index) => (
           <div key={index}>
             <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
