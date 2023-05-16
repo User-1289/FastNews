@@ -166,12 +166,15 @@ await getSelCat(category);
   {
     //deleting form frontend
     let orgCat = e.target.parentElement.innerText.replace("delete", "")
+   // alert(orgCat)
   //  alert(e.target.parentElement.innerText.replace("delete", ""))
     let currentCats = JSON.parse(localStorage.getItem("Categories"))
     for(let i = 0; i < currentCats.length; i++)
     {
-      if(currentCats[i]==orgCat)
+      console.log(currentCats[i] + ' ' + orgCat.toLowerCase())
+      if(currentCats[i]===orgCat.toLowerCase())
       {
+       // alert(orgCat)
         deleteData()
         currentCats.splice(i, 1)
         localStorage.setItem("Categories", JSON.stringify(currentCats))
