@@ -37,6 +37,11 @@ useEffect(() =>
 }, [])
   async function getNews(event) 
   {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+    
     let allCats = document.querySelectorAll('.news-types')
     for(let cats of allCats)
     {

@@ -30,7 +30,7 @@ text-transform: capitalize;
 .category-txt{
         display: inline;
         background-color: gray;
-        position: absolute;
+        position: fixed;
         top: 15%;
         left: 0;
         width: 190px;

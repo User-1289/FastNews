@@ -125,6 +125,10 @@ await getSelCat(category);
 
   function displayCat(categoryVal,event) 
   {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
     //alert(event.target.innerText)
    // return;
     let allCats = document.querySelectorAll('.cat-txt')
