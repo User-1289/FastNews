@@ -32,6 +32,7 @@ export default function Category(props)
   //const [container, deleteContainer] = useState(false);//to delete the container
   const [catArr, setCatArr] = useState([]);//this array contains all the categories user entered
   const [newsData, setNewsData] = useState([]);//this is used to send data to the app.js to diisplay news there
+  const checkDup = useRef(null)
   let isBad;
  // const [spanTxt, setSpanTxt] = useState('');
 
@@ -64,6 +65,7 @@ useEffect(() =>
 
   const saveCategory = async () => 
   {
+alert(checkDup.current.value)
     const url = 'https://neutrinoapi-bad-word-filter.p.rapidapi.com/bad-word-filter';
 const options = {
 	method: 'POST',
@@ -98,6 +100,17 @@ if(isBad===true)
 	console.error(error);
 }
 let newArr = [...catArr];
+
+    for(let i = 0; i < newArr.length; i++)
+    {
+      console.log('nice')
+      if(newArr[i]===checkDup.current.value)
+      {
+        checkDup.current.value = ''
+      return;
+      }
+    }
+
 newArr.push(category);
 if(newArr.length>10)
 {
@@ -164,6 +177,7 @@ await getSelCat(category);
 
   function deleteCat(e)
   {
+    
     //deleting form frontend
     let orgCat = e.target.parentElement.innerText.replace("delete", "")
    // alert(orgCat)
@@ -171,10 +185,10 @@ await getSelCat(category);
     let currentCats = JSON.parse(localStorage.getItem("Categories"))
     for(let i = 0; i < currentCats.length; i++)
     {
-      console.log(currentCats[i] + ' ' + orgCat.toLowerCase())
-      if(currentCats[i]===orgCat.toLowerCase())
+      console.log(currentCats[i].toLowerCase() + ' ' + orgCat.toLowerCase())
+      if(currentCats[i].toLowerCase().trim()==orgCat.toLowerCase().trim())
       {
-       // alert(orgCat)
+      //  alert(orgCat)
        // deleteData()
         currentCats.splice(i, 1)
         localStorage.setItem("Categories", JSON.stringify(currentCats))
@@ -205,7 +219,7 @@ await getSelCat(category);
 
       <button onClick={showCat}>Personalize your news feed</button><br/>
         <div className='input-container'>
-        <input placeholder='add your interest' id="category-input" onChange={setCatVal} value={category} />
+        <input ref={checkDup} placeholder='add your interest' id="category-input" onChange={setCatVal} value={category} />
         <span onClick={saveCategory} className="material-symbols-outlined">
           check_circle
         </span>
