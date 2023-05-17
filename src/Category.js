@@ -175,7 +175,7 @@ await getSelCat(category);
       if(currentCats[i]===orgCat.toLowerCase())
       {
        // alert(orgCat)
-        deleteData()
+       // deleteData()
         currentCats.splice(i, 1)
         localStorage.setItem("Categories", JSON.stringify(currentCats))
         setCatArr(currentCats)

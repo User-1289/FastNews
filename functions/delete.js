@@ -9,8 +9,9 @@ const dbSchema = new mongoose.Schema({
   url: String,
   urlToImage: String,
 });
-
+let selCol;
 exports.handler = async (event, context) => {
+
   let newsKey = JSON.parse(event.body).uniqueKey
 
   if(newsKey!=process.env.REACT_APP_UNIQUE_KEY)
@@ -21,6 +22,11 @@ exports.handler = async (event, context) => {
     }
   }
   let delCat = JSON.parse(event.body).categoryName;
+  console.log(delCat)
+  //return{
+  //  statusCode:200,
+  //  body:JSON.stringify({message:"nice"})
+  //}
   let delWord = delCat.charAt(0).toUpperCase() + delCat.slice(1) + "Col";
   try {
     await mongoose.connect(process.env.DB_URI, {
@@ -34,14 +40,35 @@ exports.handler = async (event, context) => {
 
   console.log(`Updated ${result.nModified} document(s)`);
 
-  let selCol = mongoose.model(delCat+'-news', dbSchema)
-
-  await selCol.collection.drop();
-    console.log('Collection dropped successfully.');
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: "Successfully deleted", code:delCat })
-    };
+// ...
+ selCol = mongoose.model(delCat + '-news', dbSchema)
+//console.log(selCol)
+selCol.collection.drop()
+      .then(() => {
+        console.log('Collection dropped successfully');
+        mongoose.disconnect(); // Disconnect from MongoDB
+      })
+      .catch((error) => {
+        console.error('Error dropping collection:', error);
+        mongoose.disconnect(); // Disconnect from MongoDB
+      });
+      delete mongoose.connection.models[selCol];
+return{
+  statusCode:200,
+  body:JSON.stringify({message:"Deleted"})
+}
+//let selCol = mongoose.model(delCat+'-news', dbSchema)
+//
+//await mongoose.connection.db.dropCollection(delCat+'-news');
+//
+//console.log('Collection dropped successfully.');
+//return {
+//  statusCode: 200,
+//  body: JSON.stringify({ message: "Successfully deleted", code:delCat })
+//};
+//
+//// ...
+//
   } catch (error) {
     console.log(error);
     return {
