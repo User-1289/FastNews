@@ -5,7 +5,7 @@ export default function Category(props)
 {
   function showMobSide()
   {
-      document.querySelector(".sidebar").style.display = "inline"
+      //document.querySelector(".sidebar").style.display = "inline"
       document.querySelector(".category-txt").style.display = "inline"
       document.querySelector(".menu-cl").style.display = "none"
       document.querySelector(".cancel-cl").style.display = "inline"
@@ -14,7 +14,7 @@ export default function Category(props)
   function closeSidebar()
   {
       document.getElementById('root').style.opacity = "1"
-      document.querySelector(".sidebar").style.display = "none"
+     // document.querySelector(".sidebar").style.display = "none"
       document.querySelector(".category-txt").style.display = "none"    
       document.querySelector(".menu-cl").style.display = "inline"
       document.querySelector(".cancel-cl").style.display = "none"
@@ -143,7 +143,7 @@ await getSelCat(category);
     if(isMobile===true)
     {
         document.getElementById('root').style.opacity = "1"
-        document.querySelector(".sidebar").style.display = "none"
+       // document.querySelector(".sidebar").style.display = "none"
         document.querySelector(".category-txt").style.display = "none"    
         document.querySelector(".menu-cl").style.display = "inline"
         document.querySelector(".cancel-cl").style.display = "none"
@@ -199,11 +199,10 @@ await getSelCat(category);
             <div className='mobile-sidebar'>
         <span onClick={showMobSide} className="material-symbols-outlined menu-cl">menu</span>
         </div>
-        <nav className="sidebar">
-        </nav>
+
       <div className='category-txt'>
-      <span onClick={closeSidebar} className="material-symbols-outlined cancel-cl">cancel</span><br/>
-        <br/>
+      <span onClick={closeSidebar} className="material-symbols-outlined cancel-cl">cancel</span>
+
       <button onClick={showCat}>Personalize your news feed</button><br/>
         <div className='input-container'>
         <input placeholder='add your interest' id="category-input" onChange={setCatVal} value={category} />
@@ -223,7 +222,7 @@ await getSelCat(category);
                 className="cat-txt">
                 {cat}
               </span>
-              <span onClick={deleteCat} className="material-symbols-outlined">delete</span>
+              <span onClick={deleteCat} className="material-symbols-outlined del-cl">delete</span>
             </div><br/>
             </>
           ))}

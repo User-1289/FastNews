@@ -51,6 +51,7 @@ input::placeholder{
     color: rgba(255, 255, 255, 0.3);
 }
 .category-txt button{
+
     font-family: sans-serif;
     font-weight: bold;
   background: gray;
@@ -59,7 +60,9 @@ input::placeholder{
     display: inline;
     border-radius: 10px;
     cursor: pointer;
-
+}
+.del-cl{
+  float: right;
 }
 @media (max-width: 800px) {
     .category-txt{
