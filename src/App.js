@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Main.css';
-import Sidebar from './Sidebar'
 import Category from './Category';
 
 function App(props) 
 {
-  const [lastScrollX, setLastScrollX] = useState(0);
-
-
   const [news, setNews] = useState("News");
   const [arr, setArr] = useState([]);
   const [newsType, setNewsType] = useState("World")
@@ -17,7 +13,6 @@ function App(props)
       if(catArr.length>0)
       {
         setArr(catArr)
-
       }
   }, [catArr]);
 
@@ -72,7 +67,18 @@ useEffect(() =>
       console.log(error);
     }
   }
+  const shareContent = async (articleUrl) => {
+    try {
+      await navigator.share({
+        url: articleUrl,
+      });
+      console.log('Shared successfully');
+    } catch (error) {
+      console.error('Error sharing:', error);
+    }
+  };
 
+  
   return (
     <>
       <div className='nav-bar'> 
@@ -93,6 +99,9 @@ useEffect(() =>
             <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
             <div className='author-txt'>{obj.author}</div>
              <a rel="noreferrer" target="_blank" href={obj.url} key={index}><h2>{obj.title}</h2></a>
+             <span onClick={() => {shareContent(obj.url)}} class="material-symbols-outlined">
+share
+</span>
              <span>
              <details>
               <summary>view more</summary>

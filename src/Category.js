@@ -103,7 +103,7 @@ let newArr = [...catArr];
 
     for(let i = 0; i < newArr.length; i++)
     {
-      console.log('nice')
+    //  console.log('nice')
       if(newArr[i]===checkDup.current.value)
       {
         checkDup.current.value = ''
@@ -122,8 +122,22 @@ if(newArr.length>10)
 localStorage.setItem("Categories", JSON.stringify(newArr))
 setCategory('');
 await getSelCat(category);
+
+try {
+  let response = await fetch('/.netlify/functions/datenews', {
+    method: 'POST',
+    body: JSON.stringify({ newsVar: category, uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
+  });
+  const data = await response.json();
+console.log((data))
+}
+catch(err)
+{
+  console.log(err)
+}
   }
-  async function getSelCat(catVal) {
+  async function getSelCat(catVal) 
+  {
     try {
       let response = await fetch('/.netlify/functions/getdata', {
         method: 'POST',
@@ -136,7 +150,7 @@ await getSelCat(category);
     }
   }
 
-  function displayCat(categoryVal,event) 
+   async function displayCat(categoryVal,event) 
   {
     window.scrollTo({
       top: 0,
@@ -169,6 +183,18 @@ await getSelCat(category);
     await getSelCat(categoryVal.toLowerCase());
    }
    takeData()
+   try {
+    let response = await fetch('/.netlify/functions/datenews', {
+      method: 'POST',
+      body: JSON.stringify({ newsVar: categoryVal, uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
+    });
+    const data = await response.json();
+  console.log((data))
+  }
+  catch(err)
+  {
+    console.log(err)
+  }
   }
 
   useEffect(() => {
