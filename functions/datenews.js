@@ -27,7 +27,7 @@ let todayDate = year + '-' + month + '-' + day
    if(data.length===1)
    {
    const numericalId = data[0]._id.valueOf();
-   await dateCol.findByIdAndUpdate(numericalId, { DateVisited:'i am nice'}, { new: true });
+   await dateCol.findByIdAndUpdate(numericalId, { DateVisited:todayDate}, { new: true });
 console.log(numericalId);
    }
    else if(data.length<1)

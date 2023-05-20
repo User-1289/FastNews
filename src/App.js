@@ -37,7 +37,11 @@ useEffect(() =>
       top: 0,
       behavior: "smooth"
     });
-    
+    let selCats = document.querySelectorAll('.cat-txt')
+    for(let cats of selCats)
+    {
+      cats.style.backgroundColor = 'white'
+    }
     let allCats = document.querySelectorAll('.news-types')
     for(let cats of allCats)
     {
@@ -91,7 +95,7 @@ useEffect(() =>
         <button onClick={(event) => getNews(event)} className='news-types'>Entertainment News</button>
       </div>    
 
-      <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)} catColor={clearCatColor} /> 
+      <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
         <center>
       <div className='news-container'>
       <br/><br/><br/>

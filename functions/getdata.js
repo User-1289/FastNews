@@ -92,7 +92,8 @@ exports.handler = async (event, context) => {
       statusCode: 200,
       body: JSON.stringify(catArr),
     };
-  } else if (isExisting === false) 
+  } 
+  else if (isExisting === false) 
   {
     let createCol = mongoose.model(newsVar + "-news", createSchema);
     let newsArr;

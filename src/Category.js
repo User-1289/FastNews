@@ -160,6 +160,11 @@ catch(err)
     });
     //alert(event.target.innerText)
    // return;
+    let defaultNews = document.querySelectorAll('.news-types')
+    for(let el of defaultNews)
+    {
+      el.style.color = 'black'
+    }
     let allCats = document.querySelectorAll('.cat-txt')
     for(let cats of allCats)
     {
