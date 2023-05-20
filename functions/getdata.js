@@ -61,12 +61,12 @@ exports.handler = async (event, context) => {
 
   for (let i = 0; i < arr[0].Category.length; i++) {
     if (arr[0].Category[i] == newsConv) {
-      console.log('i exists')
+     // console.log('i exists')
       // queryCol = arr[0].Category[i]
       isExisting = true;
       break;
     } else {
-      console.log("i don't exist")
+     // console.log("i don't exist")
       // delete mongoose.connection.models[newsVar + '-news'];
       isExisting = false;
     }
@@ -116,7 +116,7 @@ exports.handler = async (event, context) => {
           .save()
           .then(() => {
             times++;
-            console.log("Document saved to MongoDB Atlas");
+           // console.log("Document saved to MongoDB Atlas");
           })
           .catch((error) => {
             console.log(
@@ -142,7 +142,7 @@ exports.handler = async (event, context) => {
     { new: true }
     );
     
-    console.log(getCats);
+    //console.log(getCats);
     return {
     statusCode: 404,
     body: JSON.stringify({ message: "Saved" }),

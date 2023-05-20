@@ -8,7 +8,7 @@ function App(props)
   const [arr, setArr] = useState([]);
   const [newsType, setNewsType] = useState("World")
   const [catArr, setCatArr] = useState([])
-
+  const [clearCatColor, setClearCatColor] = useState(true)
     useEffect(() => {
       if(catArr.length>0)
       {
@@ -32,6 +32,7 @@ useEffect(() =>
 }, [])
   async function getNews(event) 
   {
+    setClearCatColor(false)
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -90,7 +91,7 @@ useEffect(() =>
         <button onClick={(event) => getNews(event)} className='news-types'>Entertainment News</button>
       </div>    
 
-      <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}/> 
+      <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)} catColor={clearCatColor} /> 
         <center>
       <div className='news-container'>
       <br/><br/><br/>

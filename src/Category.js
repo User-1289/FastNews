@@ -32,6 +32,9 @@ export default function Category(props)
   //const [container, deleteContainer] = useState(false);//to delete the container
   const [catArr, setCatArr] = useState([]);//this array contains all the categories user entered
   const [newsData, setNewsData] = useState([]);//this is used to send data to the app.js to diisplay news there
+  //const [color,setColor] = useState(props.catColor)
+
+
   const checkDup = useRef(null)
   let isBad;
  // const [spanTxt, setSpanTxt] = useState('');
@@ -65,7 +68,6 @@ useEffect(() =>
 
   const saveCategory = async () => 
   {
-alert(checkDup.current.value)
     const url = 'https://neutrinoapi-bad-word-filter.p.rapidapi.com/bad-word-filter';
 const options = {
 	method: 'POST',
@@ -87,7 +89,7 @@ try
   const jsonBad = JSON.parse(result); 
  isBad = jsonBad['is-bad']; 
 
-console.log(isBad); 
+//console.log(isBad); 
 if(isBad===true)
 {
   alert("You requested inappropriate category")
@@ -129,7 +131,7 @@ try {
     body: JSON.stringify({ newsVar: category, uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
   });
   const data = await response.json();
-console.log((data))
+//console.log((data))
 }
 catch(err)
 {
@@ -189,7 +191,7 @@ catch(err)
       body: JSON.stringify({ newsVar: categoryVal, uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
     });
     const data = await response.json();
-  console.log((data))
+ // console.log((data))
   }
   catch(err)
   {
@@ -211,7 +213,7 @@ catch(err)
     let currentCats = JSON.parse(localStorage.getItem("Categories"))
     for(let i = 0; i < currentCats.length; i++)
     {
-      console.log(currentCats[i].toLowerCase() + ' ' + orgCat.toLowerCase())
+     // console.log(currentCats[i].toLowerCase() + ' ' + orgCat.toLowerCase())
       if(currentCats[i].toLowerCase().trim()==orgCat.toLowerCase().trim())
       {
       //  alert(orgCat)
@@ -231,7 +233,7 @@ catch(err)
   })
     const delData = await responce.json();
     alert('Successfully deleted')
-    console.log(delData)
+    //console.log(delData)
   }
 }
   return (
