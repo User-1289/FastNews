@@ -138,7 +138,7 @@ exports.handler = async (event, context) => {
     delete mongoose.connection.models[userSelDoc];
     
     let getCats = await CatCol.findOneAndUpdate(
-    { _id: "645686c39e2459f0b58b16f7" },
+    { _id: "64678d02bf08f3e5daedce28" },
     { $push: { Category: newsConv } },
     { new: true }
     );

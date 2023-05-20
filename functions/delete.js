@@ -33,7 +33,7 @@ exports.handler = async (event, context) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    const filter = { _id: '645686c39e2459f0b58b16f7', Category: delWord };
+    const filter = { _id: '64678d02bf08f3e5daedce28', Category: delWord };
     const update = { $pull: { Category: delWord } };
     const result = await delCol.updateOne(filter, update);
     
