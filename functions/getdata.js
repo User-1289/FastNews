@@ -134,15 +134,15 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({ message: "Error fetching news from API" }),
       };
     }
+
+        let getCats = await CatCol.findOneAndUpdate(
+          { _id: "64678d02bf08f3e5daedce28" },
+          { $push: { Category: newsConv } },
+          { new: true }
+          );
     }
     delete mongoose.connection.models[userSelDoc];
-    
-    let getCats = await CatCol.findOneAndUpdate(
-    { _id: "64678d02bf08f3e5daedce28" },
-    { $push: { Category: newsConv } },
-    { new: true }
-    );
-    
+        
     //console.log(getCats);
     return {
     statusCode: 404,
