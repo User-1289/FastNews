@@ -6,18 +6,18 @@ export default function Category(props)
   function showMobSide()
   {
       //document.querySelector(".sidebar").style.display = "inline"
-      document.querySelector(".category-txt").style.display = "inline"
-      document.querySelector(".menu-cl").style.display = "none"
-      document.querySelector(".cancel-cl").style.display = "inline"
+      document.querySelector(".category-txt").style.visibility = "visible"
+      document.querySelector(".menu-cl").style.visibility = "hidden"
+      document.querySelector(".cancel-cl").style.visibility = "visible"
       document.getElementById('root').style.opacity = "0.5"
   }
   function closeSidebar()
   {
       document.getElementById('root').style.opacity = "1"
      // document.querySelector(".sidebar").style.display = "none"
-      document.querySelector(".category-txt").style.display = "none"    
-      document.querySelector(".menu-cl").style.display = "inline"
-      document.querySelector(".cancel-cl").style.display = "none"
+      document.querySelector(".category-txt").style.visibility = "hidden"    
+      document.querySelector(".menu-cl").style.visibility = "visible"
+      document.querySelector(".cancel-cl").style.visibility = "hidden"
   }
   const showCat = () => {
     document.getElementById('category-input').focus()
@@ -45,7 +45,7 @@ export default function Category(props)
       if (windowSize.width <= 768) {
         setIsMobile(true);
       } else {
-        setIsMobile(false);
+        setIsMobile(true);
       }
 }, [])
 
@@ -176,11 +176,12 @@ catch(err)
    // alert(isMobile)
     if(isMobile===true)
     {
+
         document.getElementById('root').style.opacity = "1"
        // document.querySelector(".sidebar").style.display = "none"
-        document.querySelector(".category-txt").style.display = "none"    
-        document.querySelector(".menu-cl").style.display = "inline"
-        document.querySelector(".cancel-cl").style.display = "none"
+        document.querySelector(".category-txt").style.visibility = "hidden"    
+        document.querySelector(".menu-cl").style.visibility = "visible"
+        document.querySelector(".cancel-cl").style.visibility = "hidden"
     }
 
     const spanText = spanRef.current.getAttribute('val');
@@ -244,7 +245,14 @@ catch(err)
   return (
     <>
             <div className='mobile-sidebar'>
-        <span onClick={showMobSide} className="material-symbols-outlined menu-cl">menu</span>
+        <span onClick={showMobSide} className="material-symbols-outlined menu-cl">menu</span><br/>
+        <span className='txt-indic'>Add your interest</span>
+        <span onMouseLeave={() => {document.querySelector('.info-txt').style.visibility='hidden'}} onMouseEnter={() => {document.querySelector('.info-txt').style.visibility='visible'}} class="material-symbols-outlined">
+info
+</span>
+<span className='info-txt'>
+          You can add your interests such as person, topic etc. Click the menu to enter
+        </span>
         </div>
 
       <div className='category-txt'>

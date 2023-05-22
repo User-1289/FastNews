@@ -3,7 +3,7 @@ body{
 }
 
 .sidebar {
-display: inline;
+visibility: hidden;
 
   width:190px;
   position: absolute;
@@ -17,12 +17,19 @@ display: inline;
   color: #f1f1f1;
 }
 .mobile-sidebar{
-  display: none;
+  position: fixed;
+  margin: 3px;
+  top:15%;
+  color:white;
 }
 .cancel-cl{
-  display: none;
-  background: gray;
+
   color: white;
+  background: none;
+  display: inline;
+  float: right;
+}
+.menu-cl{
 
 }
 @media (max-width: 800px) 
@@ -47,13 +54,14 @@ display: inline;
 }
 .cancel-cl{
   background: none;
-  display: inline;
+  visibility: hidden;
   float: right;
+
 }
 .menu-cl{
-  position: relative;
+  position: fixed;
     margin: 3px;
-    top:4px;
+    top:10%;
     color:white;
 }
 }

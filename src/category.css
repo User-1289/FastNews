@@ -28,7 +28,7 @@ text-transform: capitalize;
     cursor: pointer;
 }
 .category-txt{
-        display: inline;
+        visibility: hidden;
         background-color: gray;
         position: fixed;
         top: 15%;
@@ -64,13 +64,23 @@ input::placeholder{
 .del-cl{
   float: right;
 }
-@media (max-width: 800px) {
-    .category-txt{
-        background: gray;
-      display: none;
-      position: absolute;
-      top: 10%;
+.txt-indic{
 
-    }
-  }
-  
+
+}
+.info-txt{
+  visibility: hidden;
+  background: white;
+  color: black;
+  position: fixed;
+  top:10%;
+  width: 300px;
+  height:70px;
+  border-radius: 10px;
+}
+@media (max-width: 800px) 
+{
+.txt-indic{
+
+}
+}
