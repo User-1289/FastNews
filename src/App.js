@@ -38,6 +38,7 @@ useEffect(() =>
     const data = await responce.json();
    //return
     setArr(data);
+    setLoading(false)
   }
   defaultNews()
 }, [])
