@@ -9,10 +9,16 @@ export default function Category(props)
       document.querySelector(".category-txt").style.visibility = "visible"
       document.querySelector(".menu-cl").style.visibility = "hidden"
       document.querySelector(".cancel-cl").style.visibility = "visible"
-      document.getElementById('root').style.opacity = "0.5"
+  //   document.getElementById('root').style.opacity = "0.5"
+           document.querySelector('.news-container').style.opacity = "0.5"
+            document.querySelector('.nav-bar').style.opacity = "0.5"
+   // document.querySelector('.category-txt').style.opacity="1"
   }
   function closeSidebar()
   {
+    document.querySelector('.nav-bar').style.opacity = "1"
+    document.querySelector('.news-container').style.opacity = "1"
+
       document.getElementById('root').style.opacity = "1"
      // document.querySelector(".sidebar").style.display = "none"
       document.querySelector(".category-txt").style.visibility = "hidden"    
@@ -33,6 +39,7 @@ export default function Category(props)
   const [catArr, setCatArr] = useState([]);//this array contains all the categories user entered
   const [newsData, setNewsData] = useState([]);//this is used to send data to the app.js to diisplay news there
   //const [color,setColor] = useState(props.catColor)
+  const [loading,setLoading] = useState(false)
 
 
   const checkDup = useRef(null)
@@ -68,6 +75,7 @@ useEffect(() =>
 
   const saveCategory = async () => 
   {
+    setLoading(true)
     const url = 'https://neutrinoapi-bad-word-filter.p.rapidapi.com/bad-word-filter';
 const options = {
 	method: 'POST',
@@ -124,7 +132,7 @@ if(newArr.length>10)
 localStorage.setItem("Categories", JSON.stringify(newArr))
 setCategory('');
 await getSelCat(category);
-
+setLoading(false)
 try {
   let response = await fetch('/.netlify/functions/datenews', {
     method: 'POST',
@@ -154,6 +162,10 @@ catch(err)
 
    async function displayCat(categoryVal,event) 
   {
+    setLoading(true)
+    document.querySelector('.nav-bar').style.opacity = "1"
+    document.querySelector('.news-container').style.opacity = "1"
+
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -190,6 +202,7 @@ catch(err)
    {
     await getSelCat(categoryVal.toLowerCase());
    }
+   setLoading(false)
    takeData()
    try {
     let response = await fetch('/.netlify/functions/datenews', {
@@ -205,6 +218,12 @@ catch(err)
   }
   }
 
+
+  useEffect(() =>
+  {
+    console.log('nice')
+    props.showLoad(loading)
+  }, [loading])
   useEffect(() => {
     props.sendNews(newsData);
   }, [newsData, props]);
@@ -246,12 +265,12 @@ catch(err)
     <>
             <div className='mobile-sidebar'>
         <span onClick={showMobSide} className="material-symbols-outlined menu-cl">menu</span><br/>
-        <span className='txt-indic'>Add your interest</span>
+        <span className='txt-indic'>Personalize your <br/>news feed</span>
         <span onMouseLeave={() => {document.querySelector('.info-txt').style.visibility='hidden'}} onMouseEnter={() => {document.querySelector('.info-txt').style.visibility='visible'}} class="material-symbols-outlined">
 info
 </span>
 <span className='info-txt'>
-          You can add your interests such as person, topic etc. Click the menu to enter
+          You can add your interests such as person, topic etc and get articles about it. Click the menu to enter
         </span>
         </div>
 

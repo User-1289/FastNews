@@ -1,6 +1,7 @@
 body{
   background: black;
   color: black;
+  font-family: sans-serif;
 }
 h1{
   text-align: center;
@@ -29,6 +30,7 @@ h1{
     text-align: center;
   }
   .news-container{
+
     text-align: center;
     width:70%;
     height:auto;
@@ -56,6 +58,12 @@ h1{
   }
   .ad-container{
     float: right;
+  }
+  .loading-txt{
+    color: black;
+  }
+  .not-scroll{
+    overflow: hidden;
   }
   @media only screen and (max-width: 800px) {
     .news-types {

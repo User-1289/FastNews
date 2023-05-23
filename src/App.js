@@ -9,6 +9,17 @@ function App(props)
   const [newsType, setNewsType] = useState("World")
   const [catArr, setCatArr] = useState([])
   const [clearCatColor, setClearCatColor] = useState(true)
+  const [loading,setLoading] = useState(false)
+  const [catLoading, setCatLoading] = useState(false)
+
+  useEffect(() =>
+  {
+    if(catLoading===true)
+    {
+      alert('nice')
+      setLoading(catLoading)
+    }
+  }, [catLoading])
     useEffect(() => {
       if(catArr.length>0)
       {
@@ -32,6 +43,7 @@ useEffect(() =>
 }, [])
   async function getNews(event) 
   {
+    setLoading(true)
     setClearCatColor(false)
     window.scrollTo({
       top: 0,
@@ -68,6 +80,7 @@ useEffect(() =>
      //return
       setNews(news);
       setArr(data);
+      setLoading  (false)
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +98,8 @@ useEffect(() =>
 
   
   return (
-    <>
+    <div className='whole'>
+            <Category showLoad={load => setCatLoading((load))} newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
       <div className='nav-bar'> 
         <button onClick={(event) => getNews(event)} className='news-types'>World News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Indian News</button>
@@ -95,9 +109,9 @@ useEffect(() =>
         <button onClick={(event) => getNews(event)} className='news-types'>Entertainment News</button>
       </div>    
 
-      <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
         <center>
       <div className='news-container'>
+        { loading && <h1 className='loading-txt'>Loading</h1>}
       <br/><br/><br/>
         {arr.map((obj, index) => (
           <div key={index}>
@@ -119,7 +133,7 @@ share
           ))}
       </div>
       </center>
-    </>
+    </div>
   );
 }
 
