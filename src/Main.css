@@ -60,7 +60,7 @@ h1{
     float: right;
   }
   .loading-txt{
-    color: black;
+    color: white;
   }
   .not-scroll{
     overflow: hidden;

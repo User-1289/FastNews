@@ -9,7 +9,7 @@ function App(props)
   const [newsType, setNewsType] = useState("World")
   const [catArr, setCatArr] = useState([])
   const [clearCatColor, setClearCatColor] = useState(true)
-  const [loading,setLoading] = useState(false)
+  const [loading,setLoading] = useState(true)
   const [catLoading, setCatLoading] = useState(false)
 
   useEffect(() =>
