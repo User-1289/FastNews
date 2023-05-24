@@ -41,7 +41,11 @@ export default function Category(props)
   //const [color,setColor] = useState(props.catColor)
   const [loading,setLoading] = useState(false)
 
-
+  useEffect(() =>
+  {
+    console.log('nice')
+    props.showLoad(loading)
+  }, [loading])
   const checkDup = useRef(null)
   let isBad;
  // const [spanTxt, setSpanTxt] = useState('');
@@ -163,6 +167,7 @@ catch(err)
    async function displayCat(categoryVal,event) 
   {
     setLoading(true)
+
     document.querySelector('.nav-bar').style.opacity = "1"
     document.querySelector('.news-container').style.opacity = "1"
 
@@ -218,12 +223,6 @@ catch(err)
   }
   }
 
-
-  useEffect(() =>
-  {
-    console.log('nice')
-    props.showLoad(loading)
-  }, [loading])
   useEffect(() => {
     props.sendNews(newsData);
   }, [newsData, props]);
@@ -265,7 +264,7 @@ catch(err)
     <>
             <div className='mobile-sidebar'>
         <span onClick={showMobSide} className="material-symbols-outlined menu-cl">menu</span><br/>
-        <span className='txt-indic'>Personalize your <br/>news feed</span>
+        <span className='txt-indic'>Personalize your<br/>news feed</span>
         <span onMouseLeave={() => {document.querySelector('.info-txt').style.visibility='hidden'}} onMouseEnter={() => {document.querySelector('.info-txt').style.visibility='visible'}} class="material-symbols-outlined">
 info
 </span>
