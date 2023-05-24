@@ -100,7 +100,7 @@ useEffect(() =>
   
   return (
     <div className='whole'>
-            <Category showLoad={load => setCatLoading((load))} newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
+            <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
       <div className='nav-bar'> 
         <button onClick={(event) => getNews(event)} className='news-types'>World News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Indian News</button>

@@ -39,13 +39,13 @@ export default function Category(props)
   const [catArr, setCatArr] = useState([]);//this array contains all the categories user entered
   const [newsData, setNewsData] = useState([]);//this is used to send data to the app.js to diisplay news there
   //const [color,setColor] = useState(props.catColor)
-  const [loading,setLoading] = useState(false)
+ // const [loading,setLoading] = useState(false)
 
-  useEffect(() =>
-  {
-    console.log('nice')
-    props.showLoad(loading)
-  }, [loading])
+//  useEffect(() =>
+//  {
+//    console.log('nice')
+//    props.showLoad(loading)
+//  }, [loading])
   const checkDup = useRef(null)
   let isBad;
  // const [spanTxt, setSpanTxt] = useState('');
