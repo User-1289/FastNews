@@ -9,6 +9,7 @@ const month = today.getMonth() + 1
 const day = today.getDate()
 let todayDate = year + '-' + month + '-' + day
 
+let checkToday = new Date(todayDate)
   let newsName = JSON.parse(event.body).newsVar + '-news'
 
   try{
@@ -24,8 +25,16 @@ let todayDate = year + '-' + month + '-' + day
    let query = {CategoryName:newsName.toLowerCase()}
   // let query = {_id:"64688334b9782e177893e41d"}
    let data = await dateCol.find(query).exec()
+   let dbDate = new Date(data[0].DateVisited)
    if(data.length===1)
    {
+    if(dbDate.toISOString()===checkToday.toISOString())
+    {
+      return{
+        statusCode:200,
+        body:JSON.stringify({message:"It have been updated"})
+      }
+    }
    const numericalId = data[0]._id.valueOf();
    await dateCol.findByIdAndUpdate(numericalId, { DateVisited:todayDate}, { new: true });
 console.log(numericalId);

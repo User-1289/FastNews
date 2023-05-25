@@ -39,7 +39,7 @@ export default function Category(props)
   const [catArr, setCatArr] = useState([]);//this array contains all the categories user entered
   const [newsData, setNewsData] = useState([]);//this is used to send data to the app.js to diisplay news there
   //const [color,setColor] = useState(props.catColor)
- // const [loading,setLoading] = useState(false)
+  const [loading,setLoading] = useState(false)
 
 //  useEffect(() =>
 //  {
@@ -53,11 +53,14 @@ export default function Category(props)
 
   useEffect(() => {
     //alert(windowSize.width)
-      if (windowSize.width <= 768) {
-        setIsMobile(true);
-      } else {
+      if (windowSize.width <= 768) 
+      {
         setIsMobile(true);
       }
+        else 
+        {
+          setIsMobile(true);
+        }
 }, [])
 
 let defaultCat = ["games", "politics", "health"]
@@ -215,7 +218,7 @@ catch(err)
       body: JSON.stringify({ newsVar: categoryVal, uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
     });
     const data = await response.json();
- // console.log((data))
+  console.log((data))
   }
   catch(err)
   {
@@ -265,7 +268,7 @@ catch(err)
             <div className='mobile-sidebar'>
         <span onClick={showMobSide} className="material-symbols-outlined menu-cl">menu</span><br/>
         <span className='txt-indic'>Personalize your<br/>news feed</span>
-        <span onMouseLeave={() => {document.querySelector('.info-txt').style.visibility='hidden'}} onMouseEnter={() => {document.querySelector('.info-txt').style.visibility='visible'}} class="material-symbols-outlined">
+        <span onMouseLeave={() => {document.querySelector('.info-txt').style.visibility='hidden'}} onMouseEnter={() => {document.querySelector('.info-txt').style.visibility='visible'}} className="material-symbols-outlined">
 info
 </span>
 <span className='info-txt'>

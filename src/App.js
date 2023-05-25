@@ -12,11 +12,23 @@ function App(props)
   const [loading,setLoading] = useState(true)
   const [catLoading, setCatLoading] = useState(false)
 
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+//  useEffect(()=>
+//  {
+//    setWindowSize({
+//      width:width.innerWidth,
+//      height:window.innerHeight
+//    })
+//  }, [window.innerWidth, window.innerHeight])
   useEffect(() =>
   {
     if(catLoading===true)
     {
-      alert('nice')
+    //  alert('nice')
       setLoading(catLoading)
     }
   }, [catLoading])
@@ -36,7 +48,7 @@ useEffect(() =>
     body: JSON.stringify({ newsVar: 'world', uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
   })
     const data = await responce.json();
-   //return
+
     setArr(data);
     setLoading(false)
   }
@@ -97,6 +109,15 @@ useEffect(() =>
     }
   };
 
+  function openLink(url)
+  {
+    if(windowSize.width<=800)
+    {
+      window.location.href = url
+    }
+    else
+    window.open('_blank', url)
+  }
   
   return (
     <div className='whole'>
@@ -118,8 +139,8 @@ useEffect(() =>
           <div key={index}>
             <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
             <div className='author-txt'>{obj.author}</div>
-             <a rel="noreferrer" target="_blank" href={obj.url} key={index}><h2>{obj.title}</h2></a>
-             <span onClick={() => {shareContent(obj.url)}} class="material-symbols-outlined">
+             <a rel="noreferrer" target="_blank" href={obj.url} key={index} onClick={() => {openLink(obj.url)}}><h2>{obj.title}</h2></a>
+             <span onClick={() => {shareContent(obj.url)}} className="material-symbols-outlined">
 share
 </span>
              <span>
