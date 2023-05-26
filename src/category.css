@@ -24,7 +24,7 @@ text-transform: capitalize;
     font-size: 15px;
     width: 200px;
     border: 1px solid white;
-    border-radius: 10px;
+    border-radius: 5px;
     background: white;
     color: black;
     cursor: pointer;
@@ -33,7 +33,7 @@ text-transform: capitalize;
         visibility: hidden;
         background-color: gray;
         position: fixed;
-        top: 15%;
+        top: 0%;
         left: 0;
         z-index: 999; /* Set a high z-index value to prioritize the sidebar */
         width: 190px;
@@ -41,14 +41,25 @@ text-transform: capitalize;
         border-right: 1px solid #ccc;
         padding: 20px;
         box-sizing: border-box;    
-        border-radius: 10px;
+
 }
 .input-container{
     display: flex;
     align-items: center;
     gap: 5px;
 }
-
+.exclude-input::placeholder{
+font-size: 13px;
+font-style: italic;
+}
+.exclude-container{
+  align-items: center;
+  gap: 5px;
+  display: flex;
+}
+.exclude-cl{
+  float: right;
+}
 input::placeholder{
     font-style: italic;
     color: rgba(255, 255, 255, 0.3);
@@ -62,7 +73,8 @@ input::placeholder{
     color: white;
     display: inline;
     border-radius: 10px;
-    cursor: pointer;
+
+    border: none;
 }
 .del-cl{
   float: right;
@@ -72,7 +84,7 @@ input::placeholder{
   word-break: break-all;
   color: white;
 }
-.info-txt{
+.info-txt, .exclude-txt{
   visibility: hidden;
   background: white;
   color: black;
@@ -85,4 +97,24 @@ input::placeholder{
   font-size: 15px;
   overflow-wrap: break-word;
   
+}
+.exclude-info-txt{
+  background: white;
+  color: black;
+  position: fixed;
+  top:20%;
+
+  width: 200px;
+  height:auto;
+  border-radius: 5px;
+  font-size: 15px;
+  overflow-wrap: break-word;
+  
+}
+.summary-txt{
+  font-size: 15px;
+  text-align: left;
+}
+.exclude-info{
+  float: right;
 }

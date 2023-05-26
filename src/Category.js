@@ -3,28 +3,6 @@ import './category.css';
 import './sidebar.css'
 export default function Category(props) 
 {
-  function showMobSide()
-  {
-      //document.querySelector(".sidebar").style.display = "inline"
-      document.querySelector(".category-txt").style.visibility = "visible"
-      document.querySelector(".menu-cl").style.visibility = "hidden"
-      document.querySelector(".cancel-cl").style.visibility = "visible"
-  //   document.getElementById('root').style.opacity = "0.5"
-           document.querySelector('.news-container').style.opacity = "0.5"
-            document.querySelector('.nav-bar').style.opacity = "0.5"
-   // document.querySelector('.category-txt').style.opacity="1"
-  }
-  function closeSidebar()
-  {
-    document.querySelector('.nav-bar').style.opacity = "1"
-    document.querySelector('.news-container').style.opacity = "1"
-
-      document.getElementById('root').style.opacity = "1"
-     // document.querySelector(".sidebar").style.display = "none"
-      document.querySelector(".category-txt").style.visibility = "hidden"    
-      document.querySelector(".menu-cl").style.visibility = "visible"
-      document.querySelector(".cancel-cl").style.visibility = "hidden"
-  }
   const showCat = () => {
     document.getElementById('category-input').focus()
 }
@@ -35,11 +13,45 @@ export default function Category(props)
       });
   const spanRef = useRef(null);//to get the spans text that contains categories
   const [category, setCategory] = useState('');//to get the input's value
+  const [exlcudeWord, setExcludeWord] = useState('')
   //const [container, deleteContainer] = useState(false);//to delete the container
   const [catArr, setCatArr] = useState([]);//this array contains all the categories user entered
+  const [excludeArr,setExcludeArr] = useState([])
   const [newsData, setNewsData] = useState([]);//this is used to send data to the app.js to diisplay news there
-  //const [color,setColor] = useState(props.catColor)
+  const [excludeInfo, viewExcludeInfo] = useState(false)
   const [loading,setLoading] = useState(false)
+  const [excludeTxt, setExcludeTxt] = useState(false)
+
+  function showMobSide()
+  {
+      document.querySelector(".category-txt").style.visibility = "visible"
+      document.querySelector(".menu-cl").style.visibility = "hidden"
+      document.querySelector(".cancel-cl").style.visibility = "visible"
+      document.querySelector('.news-container').style.opacity = "0.5"
+      document.querySelector('.nav-bar').style.opacity = "0.5"
+  }
+  function closeSidebar()
+  {
+    document.querySelector('.nav-bar').style.opacity = "1"
+    document.querySelector('.news-container').style.opacity = "1"
+    document.getElementById('root').style.opacity = "1"
+    document.querySelector(".category-txt").style.visibility = "hidden"    
+    document.querySelector(".menu-cl").style.visibility = "visible"
+    document.querySelector(".cancel-cl").style.visibility = "hidden"
+  }
+
+  useEffect(() =>
+  {
+    if(localStorage.getItem("Excluded"))
+    {
+      setExcludeArr(JSON.parse(localStorage.getItem("Excluded")))
+      setExcludeTxt(true)
+    }
+    else
+    {
+      setExcludeTxt(false)
+    }
+  }, [])
 
 //  useEffect(() =>
 //  {
@@ -74,7 +86,13 @@ useEffect(() =>
   useEffect(() => {
     setCatArr(JSON.parse(localStorage.getItem("Categories")))
   }, []);
-
+//useEffect(() =>
+//{
+//  if(localStorage.getItem("Excluded"))
+//  {
+//    setExcludeArr(localStorage.getItem("Excluded"))
+//  }
+//}, [])
   const setCatVal = (event) => 
   {
     setCategory(event.target.value);
@@ -82,6 +100,7 @@ useEffect(() =>
 
   const saveCategory = async () => 
   {
+props.sendNews(excludeArr)
     setLoading(true)
     const url = 'https://neutrinoapi-bad-word-filter.p.rapidapi.com/bad-word-filter';
 const options = {
@@ -162,13 +181,18 @@ catch(err)
       });
       const data = await response.json();
       setNewsData(data);
+
     } catch (error) {
       console.log(error);
     }
   }
-
+useEffect(()=>
+{
+}, [])
    async function displayCat(categoryVal,event) 
   {
+  //  window.location.reload()
+  props.sendWord(excludeArr)
     setLoading(true)
 
     document.querySelector('.nav-bar').style.opacity = "1"
@@ -225,7 +249,10 @@ catch(err)
     console.log(err)
   }
   }
-
+useEffect(() =>
+{
+  props.sendWord(excludeArr)
+}, [props])
   useEffect(() => {
     props.sendNews(newsData);
   }, [newsData, props]);
@@ -248,6 +275,7 @@ catch(err)
         currentCats.splice(i, 1)
         localStorage.setItem("Categories", JSON.stringify(currentCats))
         setCatArr(currentCats)
+      //  window.location.reload(); // Reload the entire website
           return;
       }
   }
@@ -263,6 +291,38 @@ catch(err)
     //console.log(delData)
   }
 }
+
+function saveExcluded()
+{
+
+    let nowArr = [...excludeArr]
+    nowArr.push(exlcudeWord)
+    setExcludeArr(nowArr)
+    localStorage.setItem("Excluded", JSON.stringify(nowArr))
+    setExcludeTxt(true)
+    setExcludeWord("")
+    window.location.reload()
+}
+function excludeDeleteCat(e)
+{
+  let orgCat = e.target.parentElement.innerText.replace("delete", "")
+  // alert(orgCat)
+ //  alert(e.target.parentElement.innerText.replace("delete", ""))
+   let currentCats = JSON.parse(localStorage.getItem("Excluded"))
+   for(let i = 0; i < currentCats.length; i++)
+   {
+    // console.log(currentCats[i].toLowerCase() + ' ' + orgCat.toLowerCase())
+     if(currentCats[i].toLowerCase().trim()==orgCat.toLowerCase().trim())
+     {
+     //  alert(orgCat)
+      // deleteData()
+       currentCats.splice(i, 1)
+       localStorage.setItem("Excluded", JSON.stringify(currentCats))
+       setExcludeArr(currentCats)
+         return;
+     }
+  }
+}
   return (
     <>
             <div className='mobile-sidebar'>
@@ -272,14 +332,16 @@ catch(err)
 info
 </span>
 <span className='info-txt'>
-          You can add your interests such as person, topic etc and get articles about it. Click the menu to enter
+          You can add your interests such as person, topic etc and get articles about it. You can also exclude certain news contents that you don't like. Click the menu 
         </span>
         </div>
-
       <div className='category-txt'>
       <span onClick={closeSidebar} className="material-symbols-outlined cancel-cl">cancel</span>
 
-      <button onClick={showCat}>Personalize your news feed</button><br/>
+      <button >Personalize your news feed</button><br/><br/>
+
+      <details>
+        <summary className='summary-txt'>View addded categories</summary>
         <div className='input-container'>
         <input ref={checkDup} placeholder='add your interest' id="category-input" onChange={setCatVal} value={category} />
         <span onClick={saveCategory} className="material-symbols-outlined">
@@ -303,6 +365,40 @@ info
             </>
           ))}
         </div>
+        </details><br/>
+
+        <div>
+        <span onMouseOver={() => {viewExcludeInfo(true)}} onMouseLeave={() => {viewExcludeInfo(false)}} className="material-symbols-outlined exclude-info">
+          info
+        </span>
+        { excludeInfo && <span className='exclude-info-txt'>
+          The changes will take a refresh to update
+        </span>}
+        <details>
+        <summary className='summary-txt'>View excluded words</summary>
+        <div>
+      <div className='exclude-container'>
+    <input value={exlcudeWord} onChange={(e) => {setExcludeWord(e.target.value)}} className='exclude-input' placeholder='enter excluded words'/>
+    <span onClick={saveExcluded} className="material-symbols-outlined exclude-cl">
+          check_circle
+        </span>
+        </div><br/>
+        {excludeTxt && excludeArr.map((cat, index) => (
+            <>
+                <div key={index}>
+              <span
+                val={cat}
+                className="cat-txt">
+                {cat}
+              </span>
+              <span onClick={(e) => {excludeDeleteCat(e)}} className="material-symbols-outlined del-cl">delete</span>
+            </div><br/>
+            </>
+          ))}
+
+      </div>
+      </details>
+      </div>
       </div>
     </>
   );

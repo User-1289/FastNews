@@ -11,12 +11,16 @@ function App(props)
   const [clearCatColor, setClearCatColor] = useState(true)
   const [loading,setLoading] = useState(true)
   const [catLoading, setCatLoading] = useState(false)
-
+  const [excludeWord, setExcludeWord] = useState([])
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
   });
 
+  useEffect(() =>
+  {
+    console.log(excludeWord)
+  }, [excludeWord])
 //  useEffect(()=>
 //  {
 //    setWindowSize({
@@ -56,7 +60,6 @@ useEffect(() =>
 }, [])
   async function getNews(event) 
   {
-    setLoading(true)
     setClearCatColor(false)
     window.scrollTo({
       top: 0,
@@ -81,6 +84,7 @@ useEffect(() =>
       {
         return;
       }
+      setLoading(true)
       setNewsType(newsCut[0])
       const lNews = newsCut[0].toLowerCase();
 
@@ -92,6 +96,17 @@ useEffect(() =>
       const data = await responce.json();
      //return
       setNews(news);
+for(let i = 0; i < excludeWord.length; i++)
+{
+  for(let j = 0; j < data.length; j++)
+  {
+    if(data[j].title.toLowerCase().includes(excludeWord[i].toLowerCase()))
+    {
+      data.splice(j,1)
+      console.log('it al matches')
+    }
+  }
+}
       setArr(data);
       setLoading  (false)
     } catch (error) {
@@ -121,7 +136,7 @@ useEffect(() =>
   
   return (
     <div className='whole'>
-            <Category newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
+            <Category sendWord={word => setExcludeWord(word)} newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
       <div className='nav-bar'> 
         <button onClick={(event) => getNews(event)} className='news-types'>World News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Indian News</button>
