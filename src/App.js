@@ -131,7 +131,7 @@ for(let i = 0; i < excludeWord.length; i++)
       window.location.href = url
     }
     else
-    window.open('_blank', url)
+    window.open(url)
   }
   
   return (

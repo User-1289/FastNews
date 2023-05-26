@@ -301,7 +301,7 @@ function saveExcluded()
     localStorage.setItem("Excluded", JSON.stringify(nowArr))
     setExcludeTxt(true)
     setExcludeWord("")
-    window.location.reload()
+   // window.location.reload()
 }
 function excludeDeleteCat(e)
 {
