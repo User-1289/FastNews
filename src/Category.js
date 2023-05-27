@@ -24,22 +24,50 @@ export default function Category(props)
 
   function showMobSide()
   {
+    let details = document.querySelectorAll('.details-id');
+    for(let el of details)
+    {
+      el.open = false
+    }
+  //  let summaryTxt = document.querySelector('.summary-txt');
+  //  let details = document.querySelector('.details-id');
+  //  summaryTxt.onclick= () =>
+  //  {
+  //    details.open = false
+  //  }
       document.querySelector(".category-txt").style.visibility = "visible"
       document.querySelector(".menu-cl").style.visibility = "hidden"
       document.querySelector(".cancel-cl").style.visibility = "visible"
       document.querySelector('.news-container').style.opacity = "0.5"
       document.querySelector('.nav-bar').style.opacity = "0.5"
   }
-  function closeSidebar()
-  {
-  //  document.querySelector('.whole-exclude').style.display='none'
-    document.querySelector('.nav-bar').style.opacity = "1"
-    document.querySelector('.news-container').style.opacity = "1"
-    document.getElementById('root').style.opacity = "1"
-    document.querySelector(".category-txt").style.visibility = "hidden"    
-    document.querySelector(".menu-cl").style.visibility = "visible"
-    document.querySelector(".cancel-cl").style.visibility = "hidden"
+  function closeSidebar() {
+   // let summaryTxt = document.querySelector('.summary-txt');
+    let details = document.querySelectorAll('.details-id');
+    for(let el of details)
+    {
+      el.open = true
+    }
+   // summaryTxt.onclick= () =>
+   // {
+   //   details.open = false
+   // }
+    //for (let el of summaryTxt) {
+    //  el.onclick = () => {
+    //    for (let det of details) {
+    //      det.open = true;
+    //    }
+    //  };
+    //}
+    document.querySelector('.nav-bar').style.opacity = "1";
+    document.querySelector('.news-container').style.opacity = "1";
+    document.getElementById('root').style.opacity = "1";
+    document.querySelector(".category-txt").style.visibility = "hidden";
+    document.querySelector(".menu-cl").style.visibility = "visible";
+    document.querySelector(".cancel-cl").style.visibility = "hidden";
   }
+  
+  
 
   useEffect(() =>
   {
@@ -340,7 +368,7 @@ info
 
       <button >Personalize your news feed</button><br/><br/>
 
-      <details>
+      <details className='details-id'>
         <summary className='summary-txt'>View addded categories</summary>
         <div className='input-container'>
         <input ref={checkDup} placeholder='add your interest' id="category-input" onChange={setCatVal} value={category} />
@@ -374,7 +402,7 @@ info
         { excludeInfo && <span className='exclude-info-txt'>
           The changes will take a refresh to take place
         </span>}
-        <details>
+        <details className='details-id'>
         <summary className='summary-txt'>View excluded words</summary>
         <div className='whole-exclude'>
       <div className='exclude-container'>
