@@ -252,7 +252,7 @@ useEffect(()=>
 useEffect(() =>
 {
   props.sendWord(excludeArr)
-}, [props])
+}, [props, excludeArr])
   useEffect(() => {
     props.sendNews(newsData);
   }, [newsData, props]);
@@ -301,7 +301,6 @@ function saveExcluded()
     localStorage.setItem("Excluded", JSON.stringify(nowArr))
     setExcludeTxt(true)
     setExcludeWord("")
-   // window.location.reload()
 }
 function excludeDeleteCat(e)
 {
@@ -372,7 +371,7 @@ info
           info
         </span>
         { excludeInfo && <span className='exclude-info-txt'>
-          The changes will take a refresh to update
+          The changes will take a news change to take place
         </span>}
         <details>
         <summary className='summary-txt'>View excluded words</summary>
