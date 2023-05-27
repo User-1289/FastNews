@@ -21,13 +21,19 @@ function App(props)
   {
 
     //(excludeWord)
-    let allCats = document.querySelectorAll('.news-types')
-    for(let cats of allCats)
-    {
-      cats.style.color = 'black'
-    }
     setNewsType("World")
-    defaultNews()
+    defaultNews("duplicate")
+  let selCats = document.querySelectorAll('.cat-txt')
+  for(let cats of selCats)
+  {
+    cats.style.backgroundColor = 'white'
+  }
+  let allCats = document.querySelectorAll('.news-types')
+  for(let cats of allCats)
+  {
+    cats.style.color = 'black'
+  }
+  document.querySelector(".world-id").style.color = "blue"
    // getNews("", news)
   }, [excludeWord])
 //  useEffect(()=>
@@ -48,7 +54,8 @@ function App(props)
     useEffect(() => {
       if(catArr.length>0)
       {
-        setArr(catArr)
+        let filteredArr = filterData(catArr)
+        setArr(filteredArr)
       }
   }, [catArr]);
 
@@ -57,26 +64,28 @@ useEffect(() =>
 
   //defaultNews()
 }, [])
-  async function defaultNews()
+  async function defaultNews(isDupicate)
   {
+
   let responce = await fetch('/.netlify/functions/getdata', {
     method: 'POST',
     body: JSON.stringify({ newsVar: 'world', uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
   })
     const data = await responce.json();
 
-    for(let i = 0; i < excludeWord.length; i++)
-{
-  for(let j = 0; j < data.length; j++)
-  {
-    if(data[j].title.toLowerCase().includes(excludeWord[i].toLowerCase()))
-    {
-      data.splice(j,1)
-      //console.log('it al matches')
-    }
-  }
-}
-    setArr(data);
+  let filteredArr =  filterData(data)
+//    for(let i = 0; i < excludeWord.length; i++)
+//{
+//  for(let j = 0; j < data.length; j++)
+//  {
+//    if(data[j].title.toLowerCase().includes(excludeWord[i].toLowerCase()))
+//    {
+//      data.splice(j,1)
+//      //console.log('it al matches')
+//    }
+//  }
+//}
+    setArr(filteredArr);
     setLoading(false)
   }
   async function getNews(event) 
@@ -117,23 +126,31 @@ useEffect(() =>
       const data = await responce.json();
      //return
       setNews(news);
-for(let i = 0; i < excludeWord.length; i++)
-{
-  for(let j = 0; j < data.length; j++)
-  {
-    if(data[j].title.toLowerCase().includes(excludeWord[i].toLowerCase()))
-    {
-      data.splice(j,1)
-  //    console.log('it al matches')
-    }
-  }
-}
-      setArr(data);
+    let filteredArr = filterData(data)
+
+      setArr(filteredArr);
       setLoading  (false)
     } catch (error) {
       console.log(error);
     }
   }
+
+  function filterData(data)
+{
+  //let orgArr = data
+    for(let i = 0; i < excludeWord.length; i++)
+  {
+    for(let j = 0; j < data.length; j++)
+    {
+      if(data[j].title.toLowerCase().includes(excludeWord[i].toLowerCase()))
+      {
+        data.splice(j,1)
+      }
+    }
+  }
+
+  return data
+}
   const shareContent = async (articleUrl) => {
     try {
       await navigator.share({

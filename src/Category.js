@@ -11,8 +11,8 @@ export default function Category(props)
         width: window.innerWidth,
         height: window.innerHeight,
       });
-  const spanRef = useRef(null);//to get the spans text that contains categories
-  const [category, setCategory] = useState('');//to get the input's value
+      const spanRef = useRef(null);
+      const [category, setCategory] = useState('');//to get the input's value
   const [exlcudeWord, setExcludeWord] = useState('')
   //const [container, deleteContainer] = useState(false);//to delete the container
   const [catArr, setCatArr] = useState([]);//this array contains all the categories user entered
@@ -32,6 +32,7 @@ export default function Category(props)
   }
   function closeSidebar()
   {
+  //  document.querySelector('.whole-exclude').style.display='none'
     document.querySelector('.nav-bar').style.opacity = "1"
     document.querySelector('.news-container').style.opacity = "1"
     document.getElementById('root').style.opacity = "1"
@@ -100,7 +101,7 @@ useEffect(() =>
 
   const saveCategory = async () => 
   {
-props.sendNews(excludeArr)
+    props.sendWord(excludeArr)
     setLoading(true)
     const url = 'https://neutrinoapi-bad-word-filter.p.rapidapi.com/bad-word-filter';
 const options = {
@@ -371,11 +372,11 @@ info
           info
         </span>
         { excludeInfo && <span className='exclude-info-txt'>
-          The changes will take a news change to take place
+          The changes will take a refresh to take place
         </span>}
         <details>
         <summary className='summary-txt'>View excluded words</summary>
-        <div>
+        <div className='whole-exclude'>
       <div className='exclude-container'>
     <input value={exlcudeWord} onChange={(e) => {setExcludeWord(e.target.value)}} className='exclude-input' placeholder='enter excluded words'/>
     <span onClick={saveExcluded} className="material-symbols-outlined exclude-cl">
