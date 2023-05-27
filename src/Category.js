@@ -252,7 +252,7 @@ useEffect(()=>
 useEffect(() =>
 {
   props.sendWord(excludeArr)
-}, [props, excludeArr])
+}, [ excludeArr])
   useEffect(() => {
     props.sendNews(newsData);
   }, [newsData, props]);

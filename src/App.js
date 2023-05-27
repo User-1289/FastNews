@@ -19,7 +19,16 @@ function App(props)
 
   useEffect(() =>
   {
-    console.log(excludeWord)
+
+    //(excludeWord)
+    let allCats = document.querySelectorAll('.news-types')
+    for(let cats of allCats)
+    {
+      cats.style.color = 'black'
+    }
+    setNewsType("World")
+    defaultNews()
+   // getNews("", news)
   }, [excludeWord])
 //  useEffect(()=>
 //  {
@@ -45,6 +54,9 @@ function App(props)
 
 useEffect(() =>
 {
+
+  //defaultNews()
+}, [])
   async function defaultNews()
   {
   let responce = await fetch('/.netlify/functions/getdata', {
@@ -53,11 +65,20 @@ useEffect(() =>
   })
     const data = await responce.json();
 
+    for(let i = 0; i < excludeWord.length; i++)
+{
+  for(let j = 0; j < data.length; j++)
+  {
+    if(data[j].title.toLowerCase().includes(excludeWord[i].toLowerCase()))
+    {
+      data.splice(j,1)
+      //console.log('it al matches')
+    }
+  }
+}
     setArr(data);
     setLoading(false)
   }
-  defaultNews()
-}, [])
   async function getNews(event) 
   {
     setClearCatColor(false)
@@ -103,7 +124,7 @@ for(let i = 0; i < excludeWord.length; i++)
     if(data[j].title.toLowerCase().includes(excludeWord[i].toLowerCase()))
     {
       data.splice(j,1)
-      console.log('it al matches')
+  //    console.log('it al matches')
     }
   }
 }
@@ -138,7 +159,7 @@ for(let i = 0; i < excludeWord.length; i++)
     <div className='whole'>
             <Category sendWord={word => setExcludeWord(word)} newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
       <div className='nav-bar'> 
-        <button onClick={(event) => getNews(event)} className='news-types'>World News</button>
+        <button onClick={(event) => getNews(event)} className='news-types world-id'>World News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Indian News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Technology News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Business News</button>
