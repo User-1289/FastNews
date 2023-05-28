@@ -174,7 +174,7 @@ useEffect(() =>
   
   return (
     <div className='whole'>
-            <Category sendWord={word => setExcludeWord(word)} newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
+            <Category searchNews={arr} sendWord={word => setExcludeWord(word)} newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
       <div className='nav-bar'> 
         <button onClick={(event) => getNews(event)} className='news-types world-id'>World News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Indian News</button>
@@ -189,10 +189,10 @@ useEffect(() =>
         { loading && <h1 className='loading-txt'>Loading</h1>}
       <br/><br/><br/>
         {arr.map((obj, index) => (
-          <div key={index}>
+          <div className='news-box' key={index}>
             <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
             <div className='author-txt'>{obj.author}</div>
-             <a rel="noreferrer" target="_blank" href={obj.url} key={index} onClick={() => {openLink(obj.url)}}><h2>{obj.title}</h2></a>
+             <a className='news-titles' rel="noreferrer" target="_blank" href={obj.url} key={index} onClick={() => {openLink(obj.url)}}><h2>{obj.title}</h2></a>
              <span onClick={() => {shareContent(obj.url)}} className="material-symbols-outlined">
 share
 </span>

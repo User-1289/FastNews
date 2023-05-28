@@ -1,0 +1,25 @@
+.search-box{
+    font-size: 15px;
+    border-radius: 10px;
+    background: white;
+    width: 150px;
+    height: 20px;
+    color: black;
+}
+.search-box::placeholder{
+    color: black;
+    font-style: italic;
+}
+.desc-txt{
+    word-wrap: break-word;
+}
+.search-container{
+    display: flex;
+}
+
+@media (max-width:800px)
+{
+    .search-box{
+        width:140px;
+    }
+}

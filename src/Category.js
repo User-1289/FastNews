@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './category.css';
 import './sidebar.css'
+import Search from './Search';
 export default function Category(props) 
 {
   const showCat = () => {
     document.getElementById('category-input').focus()
 }
     const [isMobile, setIsMobile] = useState(false);
+    const [isDesktop, setIsDeskTop] = useState(false)
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -29,12 +31,7 @@ export default function Category(props)
     {
       el.open = false
     }
-  //  let summaryTxt = document.querySelector('.summary-txt');
-  //  let details = document.querySelector('.details-id');
-  //  summaryTxt.onclick= () =>
-  //  {
-  //    details.open = false
-  //  }
+
       document.querySelector(".category-txt").style.visibility = "visible"
       document.querySelector(".menu-cl").style.visibility = "hidden"
       document.querySelector(".cancel-cl").style.visibility = "visible"
@@ -48,17 +45,6 @@ export default function Category(props)
     {
       el.open = true
     }
-   // summaryTxt.onclick= () =>
-   // {
-   //   details.open = false
-   // }
-    //for (let el of summaryTxt) {
-    //  el.onclick = () => {
-    //    for (let det of details) {
-    //      det.open = true;
-    //    }
-    //  };
-    //}
     document.querySelector('.nav-bar').style.opacity = "1";
     document.querySelector('.news-container').style.opacity = "1";
     document.getElementById('root').style.opacity = "1";
@@ -94,13 +80,13 @@ export default function Category(props)
 
   useEffect(() => {
     //alert(windowSize.width)
-      if (windowSize.width <= 768) 
+      if (windowSize.width <= 800) 
       {
         setIsMobile(true);
       }
         else 
         {
-          setIsMobile(true);
+          setIsDeskTop(true);
         }
 }, [])
 
@@ -247,15 +233,15 @@ useEffect(()=>
 
       props.newsName(categoryVal);
    // alert(isMobile)
-    if(isMobile===true)
-    {
+    //if(isMobile===true)
+    //{
 
         document.getElementById('root').style.opacity = "1"
        // document.querySelector(".sidebar").style.display = "none"
         document.querySelector(".category-txt").style.visibility = "hidden"    
         document.querySelector(".menu-cl").style.visibility = "visible"
         document.querySelector(".cancel-cl").style.visibility = "hidden"
-    }
+    //}
 
     const spanText = spanRef.current.getAttribute('val');
    // setSpanTxt(spanText);
@@ -291,8 +277,7 @@ useEffect(() =>
     
     //deleting form frontend
     let orgCat = e.target.parentElement.innerText.replace("delete", "")
-   // alert(orgCat)
-  //  alert(e.target.parentElement.innerText.replace("delete", ""))
+
     let currentCats = JSON.parse(localStorage.getItem("Categories"))
     for(let i = 0; i < currentCats.length; i++)
     {
@@ -309,16 +294,7 @@ useEffect(() =>
       }
   }
 //deleting from backend
-  async function deleteData()
-  {
-  let responce = await fetch('/.netlify/functions/delete', {
-    method: 'POST',
-    body: JSON.stringify({ categoryName: orgCat.toLowerCase(), uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
-  })
-    const delData = await responce.json();
-    alert('Successfully deleted')
-    //console.log(delData)
-  }
+
 }
 
 function saveExcluded()
@@ -334,16 +310,13 @@ function saveExcluded()
 function excludeDeleteCat(e)
 {
   let orgCat = e.target.parentElement.innerText.replace("delete", "")
-  // alert(orgCat)
- //  alert(e.target.parentElement.innerText.replace("delete", ""))
+
    let currentCats = JSON.parse(localStorage.getItem("Excluded"))
    for(let i = 0; i < currentCats.length; i++)
    {
-    // console.log(currentCats[i].toLowerCase() + ' ' + orgCat.toLowerCase())
      if(currentCats[i].toLowerCase().trim()==orgCat.toLowerCase().trim())
      {
-     //  alert(orgCat)
-      // deleteData()
+
        currentCats.splice(i, 1)
        localStorage.setItem("Excluded", JSON.stringify(currentCats))
        setExcludeArr(currentCats)
@@ -358,7 +331,9 @@ function excludeDeleteCat(e)
         <span className='txt-indic'>Personalize your<br/>news feed</span>
         <span onMouseLeave={() => {document.querySelector('.info-txt').style.visibility='hidden'}} onMouseEnter={() => {document.querySelector('.info-txt').style.visibility='visible'}} className="material-symbols-outlined">
 info
-</span>
+</span><br/><br/>
+{ isDesktop && <Search searchArr={props.searchNews}/> }
+
 <span className='info-txt'>
           You can add your interests such as person, topic etc and get articles about it. You can also exclude certain news contents that you don't like. Click the menu 
         </span>
@@ -426,7 +401,8 @@ info
 
       </div>
       </details>
-      </div>
+      </div><br/>
+      {isMobile && <Search/>}
       </div>
     </>
   );
