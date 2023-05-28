@@ -11,7 +11,7 @@
     font-style: italic;
 }
 .desc-txt{
-    word-wrap: break-word;
+    word-wrap: break-word; /* Break long words to fit within the container */
 }
 .search-container{
     display: flex;

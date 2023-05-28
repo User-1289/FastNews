@@ -335,7 +335,7 @@ info
 { isDesktop && <Search searchArr={props.searchNews}/> }
 
 <span className='info-txt'>
-          You can add your interests such as person, topic etc and get articles about it. You can also exclude certain news contents that you don't like. Click the menu 
+          You can add your interests such as person, topic etc and get articles about it. Search for news. You can also exclude certain news contents that you don't like. Click the menu 
         </span>
         </div>
       <div className='category-txt'>

@@ -24,12 +24,12 @@ export default function Search(props)
     }
     function searchNews()
     {
-      document.querySelector('.category-txt').style.visibility='hidden'
-      document.querySelector(".menu-cl").style.visibility = "visible";
-      document.querySelector(".cancel-cl").style.visibility = "hidden";
-      document.querySelector('.nav-bar').style.opacity = "1";
-      document.querySelector('.news-container').style.opacity = "1";
-      document.getElementById('root').style.opacity = "1";
+      //document.querySelector('.category-txt').style.visibility='hidden'
+      //document.querySelector(".menu-cl").style.visibility = "visible";
+      //document.querySelector(".cancel-cl").style.visibility = "hidden";
+      //document.querySelector('.nav-bar').style.opacity = "1";
+      //document.querySelector('.news-container').style.opacity = "1";
+      //document.getElementById('root').style.opacity = "1";
         //console.log(textVal)
         let counter = 0
       //  let newsBoxes = document.querySelectorAll('.news-box')
@@ -68,7 +68,7 @@ export default function Search(props)
           }} value={textVal} onChange={(e) => {setTextVal(e.target.value); clearInput()}} className='search-box' type='text' placeholder='Search..' />
       <span  onClick={searchNews} className="material-symbols-outlined">search</span><br/><br/>
     </div>
-    { setText && <div className='desc-txt'>There are more than one<br/> result. Scroll down to find<br/> more</div>}
+    { setText && <div className='desc-txt'>There are more than one result.<br/>Scroll down to find  more</div>}
     </>
   );
 }

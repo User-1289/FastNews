@@ -88,9 +88,8 @@ input::placeholder{
   visibility: hidden;
   background: white;
   color: black;
-  position: fixed;
+  position: absolute;
   top:30%;
-
   width: 200px;
   height:auto;
   border-radius: 10px;
@@ -101,7 +100,7 @@ input::placeholder{
 .exclude-info-txt{
   background: white;
   color: black;
-  position: fixed;
+  position: absolute;
   top:20%;
 
   width: 200px;
@@ -117,4 +116,12 @@ input::placeholder{
 }
 .exclude-info{
   float: right;
+}
+
+@media (max-width:800px)
+{
+  .info-txt{
+    position: absolute;
+    top:15%;
+  }
 }
