@@ -332,7 +332,7 @@ function excludeDeleteCat(e)
         <span onMouseLeave={() => {document.querySelector('.info-txt').style.visibility='hidden'}} onMouseEnter={() => {document.querySelector('.info-txt').style.visibility='visible'}} className="material-symbols-outlined">
 info
 </span><br/><br/>
-{ isDesktop && <Search searchArr={props.searchNews}/> }
+{ isDesktop && <Search showDesc={props.showDesc} searchArr={props.searchNews}/> }
 
 <span className='info-txt'>
           You can add your interests such as person, topic etc and get articles about it. Search for news. You can also exclude certain news contents that you don't like. Click the menu 

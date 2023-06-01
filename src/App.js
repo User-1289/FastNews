@@ -88,14 +88,18 @@ useEffect(() =>
     setArr(filteredArr);
     setLoading(false)
   }
+
   async function getNews(event) 
   {
-   // showDescText(true)
+    showDescText(true)
     let inputBox = document.querySelector('.search-box')
     let newsTitles = document.querySelectorAll('.news-titles')
     const descTxtElement = document.querySelector(".desc-txt");
-    inputBox.value=""
-      descTxtElement.style.visibility='hidden'
+    //inputBox.value=""
+    //if(descTxtElement && descTxtElement.style.display=='visible')
+    //{
+    //  descTxtElement.style.visibility='hidden'
+    //}
       // Rest of your code
     
     for(let title of newsTitles)

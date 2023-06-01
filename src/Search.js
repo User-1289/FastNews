@@ -23,11 +23,12 @@ export default function Search(props)
     }
     function searchNews()
     {
-      const descTxtElement = document.querySelector(".desc-txt");
-      if (descTxtElement && descTxtElement.style.visibility == 'hidden') {
-        descTxtElement.style.visibility='visible'
-        // Rest of your code
-      }      
+      console.log(props.showDesc)
+      //const descTxtElement = document.querySelector(".desc-txt");
+      //if (descTxtElement && descTxtElement.style.visibility == 'hidden') {
+      //  descTxtElement.style.visibility='visible'
+      //  // Rest of your code
+      //}      
       //document.querySelector('.category-txt').style.visibility='hidden'
       //document.querySelector(".menu-cl").style.visibility = "visible";
       //document.querySelector(".cancel-cl").style.visibility = "hidden";
@@ -44,6 +45,7 @@ export default function Search(props)
           {
             
           //  title.parentElement.style.backgroundColor='gray'
+          //if(title.innerText.toLowerCase()===textVal.toLowerCase())
             if(title.innerText.toLowerCase().includes(textVal.toLowerCase()))
             {
                if(firstMatch==null)
@@ -70,8 +72,8 @@ export default function Search(props)
             if (e.key === 'Enter') {
               searchNews();
             }
-          }}  onChange={(e) => {setTextVal(e.target.value); clearInput()}} className='search-box' type='text' placeholder='Search..' />
-      <span  onClick={searchNews} className="material-symbols-outlined">search</span><br/><br/>
+          }} value={textVal} onChange={(e) => {setTextVal(e.target.value); clearInput()}} className='search-box' type='text' placeholder='Search..' />
+      <span  onClick={searchNews} className="material-symbols-outlined search-btn">search</span><br/><br/>
     </div>
     { setText && <div className='desc-txt'>There are more than one result.<br/>Scroll down to find  more</div>}
     </>
