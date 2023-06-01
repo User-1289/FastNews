@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './search.css';
-import { isLabelWithInternallyDisabledControl } from '@testing-library/user-event/dist/utils';
 
 export default function Search(props) 
 {
@@ -24,6 +23,11 @@ export default function Search(props)
     }
     function searchNews()
     {
+      const descTxtElement = document.querySelector(".desc-txt");
+      if (descTxtElement && descTxtElement.style.visibility == 'hidden') {
+        descTxtElement.style.visibility='visible'
+        // Rest of your code
+      }      
       //document.querySelector('.category-txt').style.visibility='hidden'
       //document.querySelector(".menu-cl").style.visibility = "visible";
       //document.querySelector(".cancel-cl").style.visibility = "hidden";
@@ -38,6 +42,7 @@ export default function Search(props)
       let firstMatch;
           for(let title of newsTitles)
           {
+            
           //  title.parentElement.style.backgroundColor='gray'
             if(title.innerText.toLowerCase().includes(textVal.toLowerCase()))
             {
@@ -65,7 +70,7 @@ export default function Search(props)
             if (e.key === 'Enter') {
               searchNews();
             }
-          }} value={textVal} onChange={(e) => {setTextVal(e.target.value); clearInput()}} className='search-box' type='text' placeholder='Search..' />
+          }}  onChange={(e) => {setTextVal(e.target.value); clearInput()}} className='search-box' type='text' placeholder='Search..' />
       <span  onClick={searchNews} className="material-symbols-outlined">search</span><br/><br/>
     </div>
     { setText && <div className='desc-txt'>There are more than one result.<br/>Scroll down to find  more</div>}

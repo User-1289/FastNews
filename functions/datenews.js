@@ -3,6 +3,15 @@ const mongoose = require("mongoose")
 
 
 exports.handler = async function(event, context) {
+  let newsKey = JSON.parse(event.body).uniqueKey
+
+  if(newsKey!=process.env.REACT_APP_UNIQUE_KEY)
+  {
+    return{
+      statusCode:500,
+      body:JSON.stringify({message: "You don't have the rights to use this endpoint"})
+    }
+  }
   const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth() + 1

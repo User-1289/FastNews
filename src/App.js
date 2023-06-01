@@ -16,7 +16,7 @@ function App(props)
     width: window.innerWidth,
     height: window.innerHeight,
   });
-
+const [descText,showDescText] = useState(false)
   useEffect(() =>
   {
 
@@ -90,6 +90,19 @@ useEffect(() =>
   }
   async function getNews(event) 
   {
+   // showDescText(true)
+    let inputBox = document.querySelector('.search-box')
+    let newsTitles = document.querySelectorAll('.news-titles')
+    const descTxtElement = document.querySelector(".desc-txt");
+    inputBox.value=""
+      descTxtElement.style.visibility='hidden'
+      // Rest of your code
+    
+    for(let title of newsTitles)
+    {
+      title.parentElement.style.backgroundColor='gray'
+    }
+
     setClearCatColor(false)
     window.scrollTo({
       top: 0,
@@ -174,7 +187,7 @@ useEffect(() =>
   
   return (
     <div className='whole'>
-            <Category searchNews={arr} sendWord={word => setExcludeWord(word)} newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
+            <Category showDesc={descText} searchNews={arr} sendWord={word => setExcludeWord(word)} newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
       <div className='nav-bar'> 
         <button onClick={(event) => getNews(event)} className='news-types world-id'>World News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Indian News</button>
