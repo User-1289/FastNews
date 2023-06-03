@@ -89,7 +89,7 @@ input::placeholder{
   background: white;
   color: black;
   position: absolute;
-  top:30%;
+  top:50%;
   width: 200px;
   height:auto;
   border-radius: 10px;
@@ -122,6 +122,6 @@ input::placeholder{
 {
   .info-txt{
     position: absolute;
-    top:15%;
+    top:10%;
   }
 }
