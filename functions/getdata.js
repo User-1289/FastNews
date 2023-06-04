@@ -77,7 +77,7 @@ exports.handler = async (event, context) => {
     let catArr = [];
     try {
       const data = await queryCol.find({});
-      delete mongoose.connection.models[userSelDoc];
+       delete mongoose.connection.models[userSelDoc];
       catArr = data.map((doc) => doc.toObject()); // Convert MongoDB documents to plain objects
       // queryCol = ''
     } catch (error) {
@@ -87,7 +87,7 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({ message: "Error querying database" }),
       };
     }
-
+    //mongoose.connection.close()
     return {
       statusCode: 200,
       body: JSON.stringify(catArr),
@@ -140,6 +140,7 @@ exports.handler = async (event, context) => {
           { $push: { Category: newsConv } },
           { new: true }
           );
+          mongoose.connection.close()
     }
     delete mongoose.connection.models[userSelDoc];
         

@@ -17,24 +17,13 @@ function App(props)
     height: window.innerHeight,
   });
 const [descText,showDescText] = useState(false)
+  useEffect(()=>
+  {
+    refreshNews("World")
+  }, [])
   useEffect(() =>
   {
-
-    //(excludeWord)
-    setNewsType("World")
-    defaultNews("duplicate")
-  let selCats = document.querySelectorAll('.cat-txt')
-  for(let cats of selCats)
-  {
-    cats.style.backgroundColor = 'white'
-  }
-  let allCats = document.querySelectorAll('.news-types')
-  for(let cats of allCats)
-  {
-    cats.style.color = 'black'
-  }
-  document.querySelector(".world-id").style.color = "blue"
-   // getNews("", news)
+    refreshNews(newsType)
   }, [excludeWord])
 //  useEffect(()=>
 //  {
@@ -59,12 +48,20 @@ const [descText,showDescText] = useState(false)
       }
   }, [catArr]);
 
-useEffect(() =>
-{
 
-  //defaultNews()
-}, [])
-  async function defaultNews(isDupicate)
+async function refreshNews(refreshWord,arr)
+{
+  let responce = await fetch('/.netlify/functions/getdata', {
+    method: 'POST',
+    body: JSON.stringify({ newsVar: refreshWord.toLowerCase(), uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
+  })
+    const data = await responce.json();
+    let filteredArr =  filterData(data)
+  setArr(filteredArr)
+  setLoading(false)
+
+}
+  async function defaultNews()
   {
 
   let responce = await fetch('/.netlify/functions/getdata', {
@@ -154,12 +151,14 @@ useEffect(() =>
 
   function filterData(data)
 {
+  let delArr = JSON.parse(localStorage.getItem("Excluded"))
+  //console.log(delArr)
   //let orgArr = data
-    for(let i = 0; i < excludeWord.length; i++)
+    for(let i = 0; i < delArr.length; i++)
   {
     for(let j = 0; j < data.length; j++)
     {
-      if(data[j].title.toLowerCase().includes(excludeWord[i].toLowerCase()))
+      if(data[j].title.toLowerCase().includes(delArr[i].toLowerCase()))
       {
         data.splice(j,1)
       }
@@ -173,7 +172,7 @@ useEffect(() =>
       await navigator.share({
         url: articleUrl,
       });
-      console.log('Shared successfully');
+     // console.log('Shared successfully');
     } catch (error) {
       console.error('Error sharing:', error);
     }
@@ -191,7 +190,7 @@ useEffect(() =>
   
   return (
     <div className='whole'>
-            <Category showDesc={descText} searchNews={arr} sendWord={word => setExcludeWord(word)} newsName={name=> setNews(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
+            <Category showDesc={descText} searchNews={arr} sendWord={word => setExcludeWord(word)} newsName={name=> setNewsType(name.charAt(0).toUpperCase() + name.slice(1))} sendNews={news => setCatArr(news)}  /> 
       <div className='nav-bar'> 
         <button onClick={(event) => getNews(event)} className='news-types world-id'>World News</button>
         <button onClick={(event) => getNews(event)} className='news-types'>Indian News</button>
