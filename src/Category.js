@@ -359,7 +359,7 @@ info
               <span
                 val={cat}
                 ref={spanRef}
-                onClick={(e) => displayCat(cat,e)}
+                onClick={(e) => {displayCat(cat,e);}}
                 className="cat-txt">
                 {cat}
               </span>
