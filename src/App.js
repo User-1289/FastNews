@@ -25,11 +25,6 @@ const [descText,showDescText] = useState(false)
   {
     refreshNews(newsType)
   }, [excludeWord])
-  const today = new Date();
-  const year = today.getFullYear();
-const month = today.getMonth() + 1
-const day = today.getDate()
-let todayDate = year + '-' + month + '-' + day
 //  useEffect(()=>
 //  {
 //    setWindowSize({
@@ -56,38 +51,15 @@ let todayDate = year + '-' + month + '-' + day
 
 async function refreshNews(refreshWord,arr)
 {
-
-let orgDate = new Date(todayDate)
-
   let responce = await fetch('/.netlify/functions/getdata', {
     method: 'POST',
     body: JSON.stringify({ newsVar: refreshWord.toLowerCase(), uniqueKey:process.env.REACT_APP_UNIQUE_KEY}),
   })
     const data = await responce.json();
-    //localStorage.setItem(refreshWord.toLowerCase(), JSON.stringify(obj))
     let filteredArr =  filterData(data)
   setArr(filteredArr)
-  localStorage.removeItem(refreshWord.toLowerCase())
-  let obj = {
-    DateNow:todayDate,
-    NewsData:filteredArr
-  }
-  saveToLocal(obj,refreshWord.toLowerCase())
   setLoading(false)
 
-}
-
-function saveToLocal(obj,word)
-{
-  if(localStorage.getItem(word)==null)
-  {
-    localStorage.setItem(word, JSON.stringify(obj))
-  }
-  else if(localStorage.getItem(word)!=null)
-  {
-    console.log(obj)
-  }
-  //console.log(obj)
 }
   async function defaultNews()
   {
@@ -169,12 +141,8 @@ function saveToLocal(obj,word)
      //return
       setNews(news);
     let filteredArr = filterData(data)
-    setArr(filteredArr);
-    let obj = {
-      DateNow:todayDate,
-      NewsData:filteredArr
-    }
-    saveToLocal(obj,lNews)
+
+      setArr(filteredArr);
       setLoading  (false)
     } catch (error) {
       console.log(error);
