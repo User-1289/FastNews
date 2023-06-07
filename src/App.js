@@ -17,10 +17,7 @@ function App(props)
     height: window.innerHeight,
   });
 const [descText,showDescText] = useState(false)
-  useEffect(()=>
-  {
-    refreshNews("World")
-  }, [])
+
   useEffect(() =>
   {
     refreshNews(newsType)
@@ -149,24 +146,26 @@ async function refreshNews(refreshWord,arr)
     }
   }
 
-  function filterData(data)
-{
-  let delArr = JSON.parse(localStorage.getItem("Excluded"))
-  //console.log(delArr)
-  //let orgArr = data
-    for(let i = 0; i < delArr.length; i++)
+  function filterData(data) 
   {
-    for(let j = 0; j < data.length; j++)
+    console.log(data);
+    let sendArr = [];
+    let delArr = JSON.parse(localStorage.getItem("Excluded"));
+  
+    for (let i = delArr.length - 1; i >= 0; i--) 
     {
-      if(data[j].title.toLowerCase().includes(delArr[i].toLowerCase()))
+      for (let j = data.length - 1; j >= 0; j--) 
       {
-        data.splice(j,1)
+        if (data[j].title.toLowerCase().includes(delArr[i].toLowerCase())) 
+        {
+          data.splice(j, 1);
+        }
       }
     }
+  
+    return data;
   }
-
-  return data
-}
+  
   const shareContent = async (articleUrl) => {
     try {
       await navigator.share({
