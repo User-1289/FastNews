@@ -65,6 +65,10 @@ h1{
   .not-scroll{
     overflow: hidden;
   }
+  .news-titles{
+    cursor: pointer;
+    text-decoration: underline;
+  }
   @media only screen and (max-width: 800px) {
     .news-types {
       font-size: 3.5vw;

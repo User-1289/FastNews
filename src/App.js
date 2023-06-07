@@ -68,17 +68,6 @@ async function refreshNews(refreshWord,arr)
     const data = await responce.json();
 
   let filteredArr =  filterData(data)
-//    for(let i = 0; i < excludeWord.length; i++)
-//{
-//  for(let j = 0; j < data.length; j++)
-//  {
-//    if(data[j].title.toLowerCase().includes(excludeWord[i].toLowerCase()))
-//    {
-//      data.splice(j,1)
-//      //console.log('it al matches')
-//    }
-//  }
-//}
     setArr(filteredArr);
     setLoading(false)
   }
@@ -207,12 +196,12 @@ async function refreshNews(refreshWord,arr)
           <div className='news-box' key={index}>
             <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
             <div className='author-txt'>{obj.author}</div>
-             <a className='news-titles' rel="noreferrer" target="_blank" href={obj.url} key={index} onClick={() => {openLink(obj.url)}}><h2>{obj.title}</h2></a>
+             <a className='news-titles' rel="noreferrer" target="_blank"  key={index} onClick={() => {openLink(obj.url)}}><h2>{obj.title}</h2></a>
              <span onClick={() => {shareContent(obj.url)}} className="material-symbols-outlined">
 share
 </span>
              <span>
-             <details>
+             <details style={{cursor:'pointer'}}>
               <summary>view more</summary>
               <div >{obj.description}</div>
              </details>
