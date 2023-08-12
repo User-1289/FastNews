@@ -371,11 +371,13 @@ info
         </details><br/>
 
         <div>
+        <span onClick={() => {window.location.reload();}} style={{float:'right'}} class="material-symbols-outlined">refresh</span>
+
         <span onMouseOver={() => {viewExcludeInfo(true)}} onMouseLeave={() => {viewExcludeInfo(false)}} className="material-symbols-outlined exclude-info">
           info
         </span>
         { excludeInfo && <span className='exclude-info-txt'>
-          The changes will take a refresh to take place
+          The changes will take a refresh to take place.Click refresh icon
         </span>}
         <details className='details-id'>
         <summary className='summary-txt'>View excluded words</summary>

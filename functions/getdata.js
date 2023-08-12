@@ -102,7 +102,7 @@ exports.handler = async (event, context) => {
         const response = await axios.get(`https://newsapi.org/v2/everything?q=${newsVar}&from=${yesterdayDate}&to=${todayDate}&sortBy=publishedAt&language=en&apiKey=27c7158d2aa84e4fb8eaaac70115d729`)
         //);
       newsArr = response.data.articles;
-      for (let i = 0; i <= 19; i++) 
+      for (let i = 0; i <= 29; i++) 
       {
         let myDocument = new createCol({
           author: newsArr[i].author,
@@ -131,11 +131,11 @@ exports.handler = async (event, context) => {
       console.log("Error fetching news from API:", error);
       return {
         statusCode: 500,
-        body: JSON.stringify({ message: "Error fetching news from API" }),
+        body: JSON.stringify({ message: "Error fetching news from API " + error }),
       };
     }
 
-        let getCats = await CatCol.findOneAndUpdate(
+         await CatCol.findOneAndUpdate(
           { _id: "64678d02bf08f3e5daedce28" },
           { $push: { Category: newsConv } },
           { new: true }

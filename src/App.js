@@ -21,7 +21,7 @@ const [descText,showDescText] = useState(false)
   useEffect(() =>
   {
     refreshNews(newsType)
-  }, [excludeWord])
+  }, [])
 //  useEffect(()=>
 //  {
 //    setWindowSize({
