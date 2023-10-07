@@ -140,7 +140,7 @@ async function refreshNews(refreshWord,arr)
    // console.log(data);
     let sendArr = [];
     let delArr = JSON.parse(localStorage.getItem("Excluded"));
-    if(delArr.length==0)
+    if( delArr==null || delArr.length==0)
     {
       return data
     }
