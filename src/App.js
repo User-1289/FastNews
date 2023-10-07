@@ -137,10 +137,13 @@ async function refreshNews(refreshWord,arr)
 
   function filterData(data) 
   {
-    console.log(data);
+   // console.log(data);
     let sendArr = [];
     let delArr = JSON.parse(localStorage.getItem("Excluded"));
-  
+    if(delArr.length==0)
+    {
+      return data
+    }
     for (let i = delArr.length - 1; i >= 0; i--) 
     {
       for (let j = data.length - 1; j >= 0; j--) 
@@ -197,9 +200,7 @@ async function refreshNews(refreshWord,arr)
             <img alt='not found' width='400' height='200' src={obj.urlToImage}/>
             <div className='author-txt'>{obj.author}</div>
              <a className='news-titles' rel="noreferrer" target="_blank"  key={index} onClick={() => {openLink(obj.url)}}><h2>{obj.title}</h2></a>
-             <span onClick={() => {shareContent(obj.url)}} className="material-symbols-outlined">
-share
-</span>
+             <span onClick={() => {shareContent(obj.url)}} className="material-symbols-outlined">share</span>
              <span>
              <details style={{cursor:'pointer'}}>
               <summary>view more</summary>

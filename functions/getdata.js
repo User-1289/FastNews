@@ -87,7 +87,6 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({ message: "Error querying database" }),
       };
     }
-    //mongoose.connection.close()
     return {
       statusCode: 200,
       body: JSON.stringify(catArr),
@@ -98,9 +97,8 @@ exports.handler = async (event, context) => {
     let createCol = mongoose.model(newsVar + "-news", createSchema);
     let newsArr;
     try {
-     // const response = await axios.get(
         const response = await axios.get(`https://newsapi.org/v2/everything?q=${newsVar}&from=${yesterdayDate}&to=${todayDate}&sortBy=publishedAt&language=en&apiKey=27c7158d2aa84e4fb8eaaac70115d729`)
-        //);
+        console.log(response)
       newsArr = response.data.articles;
       for (let i = 0; i <= 29; i++) 
       {
@@ -115,9 +113,8 @@ exports.handler = async (event, context) => {
         });
         myDocument
           .save()
-          .then(() => {
+          .then(() => { 
             times++;
-           // console.log("Document saved to MongoDB Atlas");
           })
           .catch((error) => {
             console.log(
