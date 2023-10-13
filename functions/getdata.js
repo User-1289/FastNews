@@ -123,6 +123,8 @@ exports.handler = async (event, context) => {
             );
           });
       }
+
+      
     }
     catch (error) {
       console.log("Error fetching news from API:", error);
@@ -143,7 +145,7 @@ exports.handler = async (event, context) => {
         
     //console.log(getCats);
     return {
-    statusCode: 404,
+    statusCode: 200,
     body: JSON.stringify({ message: "Saved" }),
     };
     };
