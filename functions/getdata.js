@@ -22,8 +22,8 @@ exports.handler = async (event, context) => {
   let todayDate = year + '-' + month + '-' + day
   let yesterdayDate = year + '-' + month + '-' + numDay
 
-  let newsKey = JSON.parse(event.body).uniqueKey
-  let newsKey  = event.queryParam
+  //let newsKey = JSON.parse(event.body).uniqueKey
+  let newsKey  = event.queryStringParameters.unique_key
   if(newsKey!=process.env.REACT_APP_UNIQUE_KEY)
   {
     return{
