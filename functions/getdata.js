@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
   let yesterdayDate = year + '-' + month + '-' + numDay
 
   let newsKey = JSON.parse(event.body).uniqueKey
-
+  let newsKey  = event.queryParam
   if(newsKey!=process.env.REACT_APP_UNIQUE_KEY)
   {
     return{
@@ -32,7 +32,8 @@ exports.handler = async (event, context) => {
     }
   }
   
-  let newsVar = JSON.parse(event.body).newsVar;
+  //let newsVar = JSON.parse(event.body).newsVar;
+  let newsVar = event.queryStringParameters.news_category
  // console.log(news)
   let isExisting = false;
   let newsConv;
