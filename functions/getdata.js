@@ -16,170 +16,139 @@ const createSchema = new mongoose.Schema({
 exports.handler = async (event, context) => {
   const today = new Date();
   const year = today.getFullYear();
-  const month = today.getMonth() + 1
-  const day = today.getDate()   
-  let numDay = Number(day-1)
-  let todayDate = year + '-' + month + '-' + day
-  let yesterdayDate = year + '-' + month + '-' + numDay
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+  const yesterday = new Date(today);
+  yesterday.setDate(day - 1);
 
-  let newsKey = JSON.parse(event.body).uniqueKey
+  let yesterdayDate = `${year}-${month.toString().padStart(2, '0')}-${yesterday.getDate().toString().padStart(2, '0')}`;
+  let todayDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
-  if(newsKey!=process.env.REACT_APP_UNIQUE_KEY)
-  {
-    return{
-      statusCode:500,
-      body:JSON.stringify({message: "You don't have the rights to use this endpoint"}),
+  const newsKey = JSON.parse(event.body).uniqueKey;
+
+  if (newsKey !== process.env.REACT_APP_UNIQUE_KEY) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: "You don't have the rights to use this endpoint" }),
       headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-}
-    }
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+      }
+    };
   }
-  
-  let newsVar = JSON.parse(event.body).newsVar;
- // console.log(news)
+
+  const newsVar = JSON.parse(event.body).newsVar;
   let isExisting = false;
   let newsConv;
   let arr = [];
   let queryCol;
-  let times = 0;
-  let userSelDoc = newsVar + "-news";
 
   try {
     await mongoose.connect(process.env.DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+
     const docs = await CatCol.find().exec();
     arr = docs;
-    delete mongoose.connection.models["news-category"];
+
+    for (let i = 0; i < arr[0].Category.length; i++) {
+      if (arr[0].Category[i] === newsVar.charAt(0).toUpperCase() + newsVar.slice(1) + "Col") {
+        isExisting = true;
+        newsConv = arr[0].Category[i];
+        break;
+      }
+    }
+
+    if (isExisting === true) {
+      queryCol = mongoose.model(newsVar + "-news", createSchema);
+
+      try {
+        const data = await queryCol.find({});
+        const catArr = data.map((doc) => doc.toObject());
+        return {
+          statusCode: 200,
+          body: JSON.stringify(catArr),
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+          }
+        };
+      } catch (error) {
+        console.log("Error querying database:", error);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ message: "Error querying database" }),
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+          }
+        };
+      }
+    } else {
+      queryCol = mongoose.model(newsVar + "-news", createSchema);
+
+      try {
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=${newsVar}&from=${yesterdayDate}&to=${todayDate}&sortBy=publishedAt&language=en&apiKey=${process.env.NEWS_API_KEY}`);
+        const newsArr = response.data.articles;
+
+        for (let i = 0; i <= 29; i++) {
+          let myDocument = new queryCol({
+            author: newsArr[i].author,
+            content: newsArr[i].content,
+            description: newsArr[i].description,
+            publishedAt: newsArr[i].publishedAt,
+            title: newsArr[i].title,
+            url: newsArr[i].url,
+            urlToImage: newsArr[i].urlToImage,
+          });
+
+          await myDocument.save();
+        }
+
+        await CatCol.findOneAndUpdate(
+          { _id: "64678d02bf08f3e5daedce28" },
+          { $push: { Category: newsConv } },
+          { new: true }
+        );
+
+        mongoose.connection.close();
+
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ message: "Saved" }),
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+          }
+        };
+      } catch (error) {
+        console.log("Error fetching news from API:", error);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ message: "Error fetching news from API " + error }),
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+          }
+        };
+      }
+    }
   } catch (err) {
     console.log(err);
     return {
       statusCode: 500,
       body: JSON.stringify({ message: "Error connecting to MongoDB Atlas" }),
       headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-}
-    };
-  }
-
-  newsConv = newsVar.charAt(0).toUpperCase() + newsVar.slice(1) + "Col";
-
-  for (let i = 0; i < arr[0].Category.length; i++) {
-    if (arr[0].Category[i] == newsConv) {
-     // console.log('i exists')
-      // queryCol = arr[0].Category[i]
-      isExisting = true;
-      break;
-    } else {
-     // console.log("i don't exist")
-      // delete mongoose.connection.models[newsVar + '-news'];
-      isExisting = false;
-    }
-  }
-
-  if (isExisting === true) {
-    let queryCol = mongoose.model(userSelDoc, createSchema);
-    let catArr = [];
-    try {
-      const data = await queryCol.find({});
-       delete mongoose.connection.models[userSelDoc];
-      catArr = data.map((doc) => doc.toObject()); // Convert MongoDB documents to plain objects
-      // queryCol = ''
-    } catch (error) {
-      console.log("Error querying database:", error);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ message: "Error querying database" }),
-        headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-}
-      };
-    }
-    return {
-      statusCode: 200,
-      body: JSON.stringify(catArr),
-      headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-}
-    };
-  } 
-  else if (isExisting === false) 
-  {
-    let createCol = mongoose.model(newsVar + "-news", createSchema);
-    let newsArr;
-    try {
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=${newsVar}&from=${yesterdayDate}&to=${todayDate}&sortBy=publishedAt&language=en&apiKey=${process.env.NEWS_API_KEY}`)
-        console.log(response)
-      newsArr = response.data.articles;
-      for (let i = 0; i <= 29; i++) 
-      {
-        let myDocument = new createCol({
-          author: newsArr[i].author,
-          content: newsArr[i].content,
-          description: newsArr[i].description,
-          publishedAt: newsArr[i].publishedAt,
-          title: newsArr[i].title,
-          url: newsArr[i].url,
-          urlToImage: newsArr[i].urlToImage,
-        });
-        myDocument
-          .save()
-          .then(() => { 
-            times++;
-          })
-          .catch((error) => {
-            console.log(
-              "Error saving document to MongoDB Atlas:",
-              error
-            );
-          });
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
       }
-
-      
-    }
-    catch (error) {
-      console.log("Error fetching news from API:", error);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ message: "Error fetching news from API " + error }),
-        headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-}
-      };
-    }
-
-         await CatCol.findOneAndUpdate(
-          { _id: "64678d02bf08f3e5daedce28" },
-          { $push: { Category: newsConv } },
-          { new: true }
-          );
-          mongoose.connection.close()
-    }
-    delete mongoose.connection.models[userSelDoc];
-        
-    //console.log(getCats);
-    return {
-    statusCode: 200,
-    body: JSON.stringify({ message: "Saved" }),
-headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-}
-
     };
-    };
-    
-    
-    
+  }
+};
