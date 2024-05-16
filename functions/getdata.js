@@ -22,8 +22,8 @@ exports.handler = async (event, context) => {
   let todayDate = year + '-' + month + '-' + day
   let yesterdayDate = year + '-' + month + '-' + numDay
 
-  //let newsKey = JSON.parse(event.body).uniqueKey
-  let newsKey  = event.queryStringParameters.unique_key
+  let newsKey = JSON.parse(event.body).uniqueKey
+
   if(newsKey!=process.env.REACT_APP_UNIQUE_KEY)
   {
     return{
@@ -32,8 +32,7 @@ exports.handler = async (event, context) => {
     }
   }
   
-  //let newsVar = JSON.parse(event.body).newsVar;
-  let newsVar = event.queryStringParameters.news_category
+  let newsVar = JSON.parse(event.body).newsVar;
  // console.log(news)
   let isExisting = false;
   let newsConv;
@@ -148,6 +147,12 @@ exports.handler = async (event, context) => {
     return {
     statusCode: 200,
     body: JSON.stringify({ message: "Saved" }),
+headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+}
+
     };
     };
     
