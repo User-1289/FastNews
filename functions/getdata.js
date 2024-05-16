@@ -117,7 +117,7 @@ exports.handler = async (event, context) => {
     let createCol = mongoose.model(newsVar + "-news", createSchema);
     let newsArr;
     try {
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=${newsVar}&from=${yesterdayDate}&to=${todayDate}&sortBy=publishedAt&language=en&apiKey=${process.env.NEWS_CAT_API_KEY}`)
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=${newsVar}&from=${yesterdayDate}&to=${todayDate}&sortBy=publishedAt&language=en&apiKey=${process.env.NEWS_API_KEY}`)
         console.log(response)
       newsArr = response.data.articles;
       for (let i = 0; i <= 29; i++) 
