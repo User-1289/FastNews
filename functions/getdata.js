@@ -28,7 +28,12 @@ exports.handler = async (event, context) => {
   {
     return{
       statusCode:500,
-      body:JSON.stringify({message: "You don't have the rights to use this endpoint"})
+      body:JSON.stringify({message: "You don't have the rights to use this endpoint"}),
+      headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+}
     }
   }
   
@@ -54,6 +59,11 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 500,
       body: JSON.stringify({ message: "Error connecting to MongoDB Atlas" }),
+      headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+}
     };
   }
 
@@ -85,11 +95,21 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 500,
         body: JSON.stringify({ message: "Error querying database" }),
+        headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+}
       };
     }
     return {
       statusCode: 200,
       body: JSON.stringify(catArr),
+      headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+}
     };
   } 
   else if (isExisting === false) 
@@ -131,6 +151,11 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 500,
         body: JSON.stringify({ message: "Error fetching news from API " + error }),
+        headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+}
       };
     }
 
