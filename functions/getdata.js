@@ -95,7 +95,7 @@ exports.handler = async (event, context) => {
         const response = await axios.get(`https://newsapi.org/v2/everything?q=${newsVar}&from=${yesterdayDate}&to=${todayDate}&sortBy=publishedAt&language=en&apiKey=${process.env.NEWS_API_KEY}`);
         const newsArr = response.data.articles;
 
-        for (let i = 0; i <= 29; i++) {
+        for (let i = 0; i < newsArr.length; i++) {
           let myDocument = new queryCol({
             author: newsArr[i].author,
             content: newsArr[i].content,
@@ -119,7 +119,7 @@ exports.handler = async (event, context) => {
 
         return {
           statusCode: 200,
-          body: JSON.stringify({ message: "Saved" }),
+          body: JSON.stringify(newsArr),
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type",
